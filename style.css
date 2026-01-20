@@ -1,0 +1,33 @@
+body {
+  background: linear-gradient(135deg, #ffd6e8, #fff0f6);
+  font-family: "Segoe UI", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.card {
+  background: white;
+  padding: 35px;
+  max-width: 420px;
+  text-align: center;
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(255, 182, 193, 0.4);
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: #ff5c8a;
+}
+
+#message {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.countdown {
+  margin-top: 25px;
+  color: #888;
+  font-size: 14px;
+}
