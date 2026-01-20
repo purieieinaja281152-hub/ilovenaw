@@ -1,29 +1,47 @@
-const startDate = new Date("2026-02-06T05:00:00"); // ออกเดินทาง ตี 5
-const endDate   = new Date("2026-02-07T17:00:00"); // กลับ 5 โมงเย็น
+const startDate = new Date("2026-02-06T05:00:00");
+const endDate   = new Date("2026-02-07T17:00:00");
 
+const messageEl = document.getElementById("message");
+const countdownEl = document.getElementById("countdown");
 
 fetch("messages.json")
   .then(res => res.json())
   .then(messages => {
-    const today = new Date();
-    const diffTime = today - startDate;
-    const dayIndex = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    const now = new Date();
 
-    if (dayIndex >= 0 && dayIndex < messages.length) {
-      document.getElementById("message").innerText = messages[dayIndex];
+    if (now < startDate) {
+      messageEl.innerText = "อีกไม่นานเราจะไปเข้าค่ายนะ 🤍";
+    } else if (now >= startDate && now <= endDate) {
+      const dayIndex = Math.floor(
+        (now.setHours(0,0,0,0) - startDate.setHours(0,0,0,0)) /
+        (1000 * 60 * 60 * 24)
+      );
+
+      messageEl.innerText =
+        messages[dayIndex] || "เราคิดถึงเธออยู่นะ 🤍";
     } else {
-      document.getElementById("message").innerText = "เรายังคิดถึงเธอเสมอ 🤍";
+      messageEl.innerText = "เรากลับมาแล้ว คิดถึงมาก 🤍";
     }
   });
 
-const countdownEl = document.getElementById("countdown");
-
 function updateCountdown() {
   const now = new Date();
+
+  if (now < startDate) {
+    countdownEl.innerText = "เราไปแค่ 2 วัน เดี๋ยวก็กลับแล้วนะ 🤍";
+    return;
+  }
+
+  if (now > endDate) {
+    countdownEl.innerText = "วันนี้เราได้เจอกันแล้ว 🤍";
+    return;
+  }
+
   const diff = endDate - now;
   const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
 
-  countdownEl.innerText = `เหลืออีก ${days} วัน เราจะได้เจอกัน`;
+  countdownEl.innerText =
+    `อดทนอีก ${days} วันนะ เดี๋ยวเราก็กลับไปกอดแล้ว 🤍`;
 }
 
 updateCountdown();
