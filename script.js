@@ -17,10 +17,27 @@ fetch("messages.json")
         (1000 * 60 * 60 * 24)
       );
 
+        const hour = new Date().getHours();
+    if (hour >= 22) {
+    messageEl.innerText += "\n\nฝันดีนะคนเก่ง 🌙";
+    }
+
+
       messageEl.innerText =
         messages[dayIndex] || "เราคิดถึงเธออยู่นะ 🤍";
     } else {
       messageEl.innerText = "เรากลับมาแล้ว คิดถึงมาก 🤍";
+      const extras = [
+  "ยิ้มหน่อยนะ 🤍",
+  "เราภูมิใจในตัวเธอมาก",
+  "อีกนิดเดียวเอง สู้ๆ",
+  "เรารออยู่ตรงนี้เสมอ"
+];
+
+if (Math.random() < 0.4) {
+  messageEl.innerText += "\n\n" + extras[Math.floor(Math.random() * extras.length)];
+}
+
     }
   });
 
@@ -45,3 +62,19 @@ function updateCountdown() {
 }
 
 updateCountdown();
+document.getElementById("missBtn").onclick = () => {
+  alert("เราก็กำลังคิดถึงเธอเหมือนกันนะ 🤍");
+};
+
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.innerText = "💗";
+  heart.style.position = "fixed";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.bottom = "0px";
+  heart.style.fontSize = "20px";
+  heart.style.animation = "floatUp 4s linear";
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 4000);
+}, 1500);
