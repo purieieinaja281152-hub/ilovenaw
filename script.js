@@ -1,5 +1,6 @@
-const startDate = new Date("2026-01-25"); // วันแรกที่เข้าค่าย
-const endDate = new Date("2026-02-05");   // วันกลับ
+const startDate = new Date("2026-02-06T05:00:00"); // ออกเดินทาง ตี 5
+const endDate   = new Date("2026-02-07T17:00:00"); // กลับ 5 โมงเย็น
+
 
 fetch("messages.json")
   .then(res => res.json())
