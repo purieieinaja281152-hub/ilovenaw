@@ -5,6 +5,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  overflow: hidden;
 }
 
 .card {
@@ -12,8 +13,9 @@ body {
   padding: 35px;
   max-width: 420px;
   text-align: center;
-  border-radius: 20px;
-  box-shadow: 0 15px 30px rgba(255, 182, 193, 0.4);
+  border-radius: 22px;
+  box-shadow: 0 15px 30px rgba(255, 182, 193, 0.45);
+  z-index: 2;
 }
 
 h1 {
@@ -24,16 +26,12 @@ h1 {
 #message {
   font-size: 18px;
   line-height: 1.6;
+  white-space: pre-line;
 }
 
-.countdown {
-  margin-top: 25px;
-  color: #888;
-  font-size: 14px;
-}
 button {
-  margin-top: 20px;
-  padding: 10px 20px;
+  margin-top: 22px;
+  padding: 10px 22px;
   background: #ff85a2;
   color: white;
   border: none;
@@ -44,6 +42,21 @@ button {
 
 button:hover {
   background: #ff5c8a;
+}
+
+.countdown {
+  margin-top: 25px;
+  color: #888;
+  font-size: 14px;
+}
+
+/* หัวใจลอย */
+.heart {
+  position: fixed;
+  bottom: 0;
+  font-size: 20px;
+  animation: floatUp 4s linear;
+  z-index: 1;
 }
 
 @keyframes floatUp {
