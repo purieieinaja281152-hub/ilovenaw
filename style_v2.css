@@ -167,3 +167,24 @@ h1 {
   50% { transform: scale(1.015); }
   100% { transform: scale(1); }
 }
+
+.mood {
+  margin-top: 20px;
+  background: #ffe0eb;
+  border-radius: 20px;
+  height: 10px;
+  overflow: hidden;
+}
+
+.mood-bar {
+  height: 100%;
+  width: 80%;
+  background: linear-gradient(90deg, #ff5c8a, #ff85a2);
+  animation: moodMove 3s ease-in-out infinite;
+}
+
+@keyframes moodMove {
+  0% { width: 60%; }
+  50% { width: 90%; }
+  100% { width: 60%; }
+}
