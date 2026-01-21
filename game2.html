@@ -2,33 +2,149 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<title>ตอบให้ดีนะ 🤨</title>
-<link rel="stylesheet" href="style_v2.css">
+<title>คำถามสำคัญ 💖</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #ffd6e8, #fff0f6);
+  font-family: "Segoe UI", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* กล่องหลัก */
+.card {
+  background: white;
+  padding: 35px;
+  border-radius: 22px;
+  text-align: center;
+  max-width: 420px;
+  box-shadow: 0 15px 30px rgba(255,182,193,0.45);
+  z-index: 10;
+  transition: 0.3s;
+}
+
+h1 {
+  color: #ff5c8a;
+}
+
+p {
+  font-size: 16px;
+}
+
+/* ปุ่ม */
+.buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+button {
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+}
+
+#rightBtn {
+  background: #ff5c8a;
+  color: white;
+}
+
+#wrongBtn {
+  background: #ccc;
+}
+
+/* เอฟเฟกต์สั่น */
+.shake {
+  animation: shake 0.4s;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  50% { transform: translateX(6px); }
+  75% { transform: translateX(-6px); }
+  100% { transform: translateX(0); }
+}
+
+/* หัวใจ */
+.heart {
+  position: fixed;
+  font-size: 22px;
+  bottom: 0;
+  animation: floatUp 3s linear;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-100vh); opacity: 0; }
+}
+
+/* ข้อความผลลัพธ์ */
+#result {
+  margin-top: 18px;
+  font-size: 16px;
+  color: #ff5c8a;
+  min-height: 24px;
+}
+</style>
 </head>
+
 <body>
 
-<div class="card">
-  <h2>คำถามสำคัญ</h2>
-  <p>ใครรักกันมากกว่ากัน</p>
+<div class="card" id="card">
+  <h1>คำถามสำคัญ 🤨</h1>
+  <p>คิดถึงเรามั้ย</p>
 
-  <button onclick="wrong()">นาว</button>
-  <button onclick="right()">ภูริ</button>
+  <div class="buttons">
+    <button id="wrongBtn">คิดถึง</button>
+    <button id="rightBtn">ไม่คิดถึง</button>
+  </div>
 
-  <p id="result"></p>
+  <div id="result"></div>
+
   <br>
-  <a href="index.html">← กลับ</a>
+  <a href="index.html">← กลับหน้าแรก</a>
 </div>
 
 <script>
-function wrong() {
-  document.getElementById("result").innerText =
-    "ม่ายช่ายจ้าาาาา543674325467328 😤";
-}
+const card = document.getElementById("card");
+const result = document.getElementById("result");
 
-function right() {
-  document.getElementById("result").innerText =
-    "ตอบถูก ต้องให้รางวัลแล้ววว 💗";
-}
+// ตอบผิด
+document.getElementById("wrongBtn").onclick = () => {
+  card.classList.add("shake");
+  result.innerText = "ตอบแบบนี้ เราจะโขด 😤";
+
+  setTimeout(() => {
+    card.classList.remove("shake");
+  }, 400);
+};
+
+// ตอบถูก
+document.getElementById("rightBtn").onclick = () => {
+  result.innerText = "เราก็คิดถึงนาวเหมือนกันนะะะ น่ารักที่สุดเลยยย💖";
+
+  // หัวใจถล่ม
+  for (let i = 0; i < 25; i++) {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerText = "💗";
+    h.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 3000);
+  }
+
+  // เปลี่ยนสีการ์ดนิดหน่อย
+  card.style.background = "#fff0f6";
+};
 </script>
 
 </body>
