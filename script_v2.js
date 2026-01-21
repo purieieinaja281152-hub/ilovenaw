@@ -190,6 +190,34 @@ function showDailyLove() {
 }
 
 
+const floatingTexts = [
+  "คิดถึงน้าาา 🤍",
+  "วันนี้ที่รักเหนื่อยมั้ย",
+  "เค้าอยู่ตรงนี้นะะะะ",
+  "อย่าลืมยิ้มเย้อๆ 💗",
+  "กอดแน่นๆ เลยยย"
+];
+
+setInterval(() => {
+  const t = document.createElement("div");
+  t.className = "floating-text";
+  t.innerText = floatingTexts[Math.floor(Math.random() * floatingTexts.length)];
+  t.style.left = Math.random() * 80 + "vw";
+  t.style.top = Math.random() * 80 + "vh";
+  document.body.appendChild(t);
+
+  setTimeout(() => t.remove(), 4000);
+}, 3500);
+
+const hour = new Date().getHours();
+const timeText = document.createElement("div");
+timeText.className = "time-text";
+
+if (hour < 12) timeText.innerText = "อรุณสวัสดิ์นะ ☀️";
+else if (hour < 18) timeText.innerText = "บ่ายแล้ว สู้ ๆ นะ 💕";
+else timeText.innerText = "คืนนี้ฝันดีนะ 🌙";
+
+document.body.appendChild(timeText);
 
 
 });
