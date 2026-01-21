@@ -7,11 +7,14 @@ const missBtn = document.getElementById("missBtn");
 
 const extraMessages = [
   "กอดผ่านหน้าจอให้หนึ่งที 🫂",
-  "ยิ้มให้ตัวเองหน่อยนะ 🤍",
-  "เราภูมิใจในตัวเธอมากจริงๆ",
-  "ถึงไม่อยู่ตรงนั้น แต่ใจอยู่กับเธอเสมอ",
-  "คิดถึงแบบพูดไม่ออกเลย"
+  "ยิ้มให้ตัวเองเย้อๆหน่อยน้าา 🤍",
+  "นาวต้องรอเค้าน้าาา",
+  "ถึงเราจะไม่อยู่ แต่ใจเราอยู่กับกับเสมอ",
+  "คิดถึงมากกกกกกๆๆ กไก่ล้านตัว"
 ];
+
+let shuffledExtras = [];
+
 
 fetch("messages.json")
   .then(res => res.json())
@@ -56,13 +59,30 @@ function updateCountdown() {
   countdownEl.innerText = `อดทนอีก ${days} วันนะ เดี๋ยวเราก็กลับไปกอดแล้ว 🤍`;
 }
 
-function setupButton(messages) {
+function setupButton() {
+  resetExtras();
+
   missBtn.onclick = () => {
-    const random =
-      extraMessages[Math.floor(Math.random() * extraMessages.length)];
-    messageEl.innerText += "\n\n" + random;
+    if (shuffledExtras.length === 0) {
+      resetExtras();
+    }
+
+    const next = shuffledExtras.pop();
+    messageEl.innerText = next;
+
+    messageEl.classList.remove("fade");
+    void messageEl.offsetWidth;
+    messageEl.classList.add("fade");
+
+    spawnHearts();
   };
 }
+
+function resetExtras() {
+  shuffledExtras = [...extraMessages]
+    .sort(() => Math.random() - 0.5);
+}
+
 
 /* หัวใจลอย */
 setInterval(() => {
@@ -74,3 +94,15 @@ setInterval(() => {
 
   setTimeout(() => heart.remove(), 4000);
 }, 1400);
+
+function spawnHearts() {
+  for (let i = 0; i < 5; i++) {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerText = "💗";
+    heart.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 4000);
+  }
+}
