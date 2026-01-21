@@ -6,6 +6,19 @@ const countdownEl = document.getElementById("countdown");
 const missBtn = document.getElementById("missBtn");
 const musicBtn = document.getElementById("musicBtn");
 const bgMusic = document.getElementById("bgMusic");
+const secretBtn = document.getElementById("secretBtn");
+let secretShown = false;
+secretBtn.onclick = () => {
+  if (!secretShown) {
+    messageEl.innerText =
+      "จริง ๆ เรารักนาววมากกว่าที่พูดออกไปอีกก 🤍";
+    secretBtn.innerText = "🤍 อ่านแล้ว";
+    secretShown = true;
+
+    spawnHearts();
+  }
+};
+
 
 let isPlaying = false;
 
@@ -16,6 +29,34 @@ const extraMessages = [
   "ถึงเราจะไม่อยู่ แต่ใจเราอยู่กับกับเสมอ",
   "คิดถึงมากกกกกกๆๆ กไก่ล้านตัว"
 ];
+
+const photos = [
+  {
+    src: "photo1.jpg",
+    caption: "อยากไปแอ่วกับนาวอีกกกกคิดถึงนาวววว"
+  },
+  {
+    src: "photo2.jpg",
+    caption: "นาวน่ารักมากกกกก คิดถึงงงงงงงงง"
+  },
+  {
+    src: "photo3.jpg",
+    caption: "ถึงตัวเราไม่ได้อยู่ใกล้กัน แต่หัวใจเราอยู่ใกล้นาวตลอดดดคิคิ"
+  },
+  {
+    src: "photo4.jpg",
+    caption: "เราไม่อยู่แค่วันสองวัน อย่าทิ้งเค้านะที่รัก"
+  },
+  {
+    src: "photo5.jpg",
+    caption: "มีความสุขที่ได้อยู่กับนาววววว"
+  },
+  {
+    src: "photo6.jpg",
+    caption: "รักนาวที่สุดเลยยยยยยย"
+  },
+];
+
 
 let shuffledExtras = [];
 
@@ -121,4 +162,19 @@ musicBtn.onclick = () => {
     musicBtn.innerText = "🎵 เปิดเพลง";
     isPlaying = false;
   }
+};
+
+const photoBtn = document.getElementById("photoBtn");
+const photoBox = document.getElementById("photoBox");
+const photo = document.getElementById("photo");
+const photoCaption = document.getElementById("photoCaption");
+
+photoBtn.onclick = () => {
+  const random = photos[Math.floor(Math.random() * photos.length)];
+
+  photo.src = random.src;
+  photoCaption.innerText = random.caption;
+  photoBox.style.display = "block";
+
+  spawnHearts();
 };

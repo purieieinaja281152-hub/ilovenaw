@@ -80,3 +80,33 @@ button:hover {
   background: #ff9fbe;
 }
 
+.buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.buttons button {
+  font-size: 14px;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+/* กล่องรูป */
+.photo-box {
+  display: none;
+  margin-top: 20px;
+}
+
+.photo-box img {
+  width: 100%;
+  border-radius: 16px;
+  margin-bottom: 8px;
+}
+
+.photo-box p {
+  font-size: 14px;
+  color: #666;
+}
+
