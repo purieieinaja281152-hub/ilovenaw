@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let secretShown = false;
   let isPlaying = false;
   let shuffledExtras = [];
+  let shuffledPhotos = [];
 
   // ===== ข้อความ =====
   const extraMessages = [
@@ -32,23 +33,21 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   const photos = [
-    
     { src: "photo1.jpg", caption: "อยากไปแอ่วกับนาวอีกกก" },
     { src: "photo2.jpg", caption: "นาวน่ารักมากกกกกก" },
     { src: "photo3.jpg", caption: "หัวใจเราอยู่ใกล้นาวเสมอ" },
-     { src: "photo4.jpg", caption: "เราไม่อยู่วัน2วัน นาวอย่าทิ้งเค้านะคิคิ" },
-      { src: "photo5.jpg", caption: "คิดถึงนาวสุดๆๆๆเลยยยอยากกอดด" },
-       { src: "photo6.jpg", caption: "รักนาวมากๆเลยยยยยยยจุ้บๆๆๆ" }
-  ];      
-       let shuffledPhotos = [];
-       function resetPhotos() {
-  shuffledPhotos = [...photos].sort(() => Math.random() - 0.5);
-}
-
+    { src: "photo4.jpg", caption: "เราไม่อยู่วัน2วัน นาวอย่าทิ้งเค้านะคิคิ" },
+    { src: "photo5.jpg", caption: "คิดถึงนาวสุดๆๆๆเลยยยอยากกอดด" },
+    { src: "photo6.jpg", caption: "รักนาวมากๆเลยยยยยยยจุ้บๆๆๆ" }
+  ];
 
   // ===== util =====
   function resetExtras() {
     shuffledExtras = [...extraMessages].sort(() => Math.random() - 0.5);
+  }
+
+  function resetPhotos() {
+    shuffledPhotos = [...photos].sort(() => Math.random() - 0.5);
   }
 
   function spawnHearts() {
@@ -84,7 +83,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const dayIndex = Math.floor(
-      (now.setHours(0,0,0,0) - startDate.setHours(0,0,0,0)) /
+      (new Date(now.setHours(0,0,0,0)) -
+       new Date(startDate.setHours(0,0,0,0))) /
       (1000 * 60 * 60 * 24)
     );
 
@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
     countdownEl.innerText = `อดทนอีก ${days} วันนะ 🤍`;
   }
 
-  // ===== ปุ่ม =====
+  // ===== ปุ่มสุ่มข้อความ =====
   if (missBtn) {
     resetExtras();
     missBtn.onclick = () => {
@@ -108,6 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 
+  // ===== ปุ่มเพลง =====
   if (musicBtn && bgMusic) {
     musicBtn.onclick = () => {
       if (!isPlaying) {
@@ -121,9 +122,9 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 
+  // ===== ปุ่มข้อความลับ =====
   if (secretBtn) {
     secretBtn.onclick = () => {
-      
       if (!secretShown) {
         messageEl.innerText = "เรารักนาวมากกว่าที่พูดออกไปอีก 🤍";
         secretBtn.innerText = "🤍 อ่านแล้ว";
@@ -133,20 +134,18 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 
-  if (photoBtn) {
-  resetPhotos();
+  // ===== ปุ่มรูป =====
+  if (photoBtn && photo && photoCaption && photoBox) {
+    resetPhotos();
 
-  photoBtn.onclick = () => {
-    if (shuffledPhotos.length === 0) {
-      resetPhotos();
-    }
-
-    const next = shuffledPhotos.pop();
-    photo.src = next.src;
-    photoCaption.innerText = next.caption;
-    photoBox.style.display = "block";
-  };
-}
-
+    photoBtn.onclick = () => {
+      if (shuffledPhotos.length === 0) resetPhotos();
+      const next = shuffledPhotos.pop();
+      photo.src = next.src;
+      photoCaption.innerText = next.caption;
+      photoBox.style.display = "block";
+      spawnHearts();
+    };
+  }
 
 });

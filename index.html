@@ -3,31 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <title>คิดถึงนะ 🤍</title>
- 
-
-<audio id="bgMusic" src="love.mp3" loop></audio>
 
   <link rel="stylesheet" href="style_v2.css">
-<script src="script_v2.js"></script>
-
 </head>
 <body>
 
+  <!-- เพลง -->
+  <audio id="bgMusic" src="love.mp3" loop></audio>
+
   <div class="card">
+    <h1>คิดถึงนาวนะ 🤍</h1>
+
+    <!-- ข้อความหลัก -->
+    <div id="message"></div>
+    <div id="countdown" class="countdown"></div>
+
+    <!-- ปุ่ม -->
     <div class="buttons">
-  <button id="missBtn">💌 สุ่มข้อความ</button>
-  <button id="musicBtn">🎵 เปิดเพลง</button>
-  <button id="photoBtn">📷 สุ่มรูป</button>
-  <button id="secretBtn">🤍 ข้อความลับ</button>
-</div>
+      <button id="missBtn">💌 สุ่มข้อความ</button>
+      <button id="musicBtn">🎵 เปิดเพลง</button>
+      <button id="photoBtn">📷 สุ่มรูป</button>
+      <button id="secretBtn">🤍 ข้อความลับ</button>
+    </div>
+  </div>
 
-</div>
+  <!-- รูป -->
+  <div class="photo-box" id="photoBox">
+    <img id="photo" src="" alt="">
+    <p id="photoCaption"></p>
+  </div>
 
-<div class="photo-box" id="photoBox">
-  <img id="photo" src="" alt="">
-  <p id="photoCaption"></p>
-</div>
-
-
+  <!-- script ควรอยู่ล่างสุด -->
+  <script src="script_v2.js"></script>
 </body>
 </html>
