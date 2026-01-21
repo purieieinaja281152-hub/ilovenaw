@@ -94,19 +94,44 @@ button:hover {
 }
 
 /* กล่องรูป */
-.photo-box {
+#photoBox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
   display: none;
-  margin-top: 20px;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-.photo-box img {
-  width: 100%;
+/* รูป */
+#photoBox img {
+  max-width: 90vw;
+  max-height: 70vh;
+  object-fit: contain;
   border-radius: 16px;
-  margin-bottom: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
-.photo-box p {
-  font-size: 14px;
-  color: #666;
+/* ข้อความใต้รูป */
+#photoCaption {
+  margin-top: 12px;
+  color: white;
+  font-size: 1.1rem;
+  text-align: center;
 }
 
+#photoBox img {
+  animation: pop 0.3s ease;
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

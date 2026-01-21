@@ -114,6 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (secretBtn) {
     secretBtn.onclick = () => {
+      
       if (!secretShown) {
         messageEl.innerText = "เรารักนาวมากกว่าที่พูดออกไปอีก 🤍";
         secretBtn.innerText = "🤍 อ่านแล้ว";
@@ -125,6 +126,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (photoBtn) {
     photoBtn.onclick = () => {
+      photoBox.onclick = () => {
+  photoBox.style.display = "none";
+};
+
       const r = photos[Math.floor(Math.random() * photos.length)];
       photo.src = r.src;
       photoCaption.innerText = r.caption;
