@@ -143,9 +143,17 @@ document.addEventListener("DOMContentLoaded", () => {
       const next = shuffledPhotos.pop();
       photo.src = next.src;
       photoCaption.innerText = next.caption;
-      photoBox.style.display = "block";
+      photoBox.style.display = "flex"; photoBox.scrollTop = 0;
+
       spawnHearts();
     };
   }
+  // ===== ปิดรูปเมื่อคลิกพื้นหลัง =====
+if (photoBox) {
+  photoBox.onclick = () => {
+    photoBox.style.display = "none";
+  };
+}
+
 
 });
