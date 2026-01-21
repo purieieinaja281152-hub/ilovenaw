@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>รักเรามั้ย 😾</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #ffd6e8, #fff0f6);
+  font-family: "Segoe UI", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.card {
+  background: white;
+  padding: 35px;
+  border-radius: 22px;
+  text-align: center;
+  max-width: 420px;
+  box-shadow: 0 15px 30px rgba(255,182,193,0.45);
+  z-index: 10;
+}
+
+h1 {
+  color: #ff5c8a;
+}
+
+#mood {
+  font-size: 16px;
+  margin: 15px 0;
+}
+
+.buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+button {
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+}
+
+#yesBtn {
+  background: #ff5c8a;
+  color: white;
+}
+
+#noBtn {
+  background: #ccc;
+}
+
+/* หัวใจ */
+.heart {
+  position: fixed;
+  font-size: 22px;
+  animation: floatUp 4s linear;
+  bottom: 0;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-100vh); opacity: 0; }
+}
+
+/* แมว */
+.cat {
+  position: fixed;
+  width: 120px;
+  animation: pop 0.5s ease;
+}
+
+@keyframes pop {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1 id="question">รักเรามั้ย 🥺</h1>
+  <div id="mood">ตอบดี ๆ นะ…</div>
+
+  <div class="buttons">
+    <button id="yesBtn">ใช่ 💗</button>
+    <button id="noBtn">ไม่ 😒</button>
+  </div>
+
+  <br>
+  <a href="index.html">← กลับหน้าแรก</a>
+</div>
+
+<script>
+let noCount = 0;
+
+const moods = [
+  "อืม… ไม่แน่ใจเหรอ 🤨",
+  "เริ่มงอนแล้วนะ 😐",
+  "จริงจังละนะ 😠",
+  "งอนมาก 😾",
+  "โกรธแล้วนะ!!! 😡"
+];
+
+const noBtn = document.getElementById("noBtn");
+const moodEl = document.getElementById("mood");
+const questionEl = document.getElementById("question");
+
+noBtn.onclick = () => {
+  noCount++;
+
+  if (noCount <= moods.length) {
+    moodEl.innerText = moods[noCount - 1];
+  }
+
+  // ปุ่มเล็กลง
+  const scale = Math.max(0, 1 - noCount * 0.2);
+  noBtn.style.transform = `scale(${scale})`;
+
+  // หายไปเลย
+  if (scale <= 0.2) {
+    noBtn.style.display = "none";
+    questionEl.innerText = "เลือกไม่ได้แล้วนะ 😏";
+  }
+};
+
+document.getElementById("yesBtn").onclick = () => {
+  questionEl.innerText = "เย้!!! รักกัน 💖";
+  moodEl.innerText = "รู้แล้วแหละว่าโกหกไม่เก่ง 😆";
+
+  // หัวใจถล่ม
+  for (let i = 0; i < 30; i++) {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerText = "💗";
+    h.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 4000);
+  }
+
+  // แมวโผล่
+  for (let i = 0; i < 6; i++) {
+    const cat = document.createElement("img");
+    cat.src = "https://cdn-icons-png.flaticon.com/512/616/616408.png";
+    cat.className = "cat";
+    cat.style.left = Math.random() * 80 + "vw";
+    cat.style.top = Math.random() * 80 + "vh";
+    document.body.appendChild(cat);
+  }
+};
+</script>
+
+</body>
+</html>
