@@ -4,6 +4,10 @@ const endDate   = new Date("2026-02-07T17:00:00");
 const messageEl = document.getElementById("message");
 const countdownEl = document.getElementById("countdown");
 const missBtn = document.getElementById("missBtn");
+const musicBtn = document.getElementById("musicBtn");
+const bgMusic = document.getElementById("bgMusic");
+
+let isPlaying = false;
 
 const extraMessages = [
   "กอดผ่านหน้าจอให้หนึ่งที 🫂",
@@ -106,3 +110,15 @@ function spawnHearts() {
     setTimeout(() => heart.remove(), 4000);
   }
 }
+
+musicBtn.onclick = () => {
+  if (!isPlaying) {
+    bgMusic.play();
+    musicBtn.innerText = "⏸ ปิดเพลง";
+    isPlaying = true;
+  } else {
+    bgMusic.pause();
+    musicBtn.innerText = "🎵 เปิดเพลง";
+    isPlaying = false;
+  }
+};

@@ -69,3 +69,14 @@ button:hover {
     opacity: 0;
   }
 }
+
+#musicBtn {
+  margin-top: 12px;
+  background: #ffc1d6;
+  font-size: 14px;
+}
+
+#musicBtn:hover {
+  background: #ff9fbe;
+}
+
