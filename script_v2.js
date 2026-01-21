@@ -154,6 +154,41 @@ if (photoBox) {
     photoBox.style.display = "none";
   };
 }
+const hugBtn = document.getElementById("hugBtn");
+
+if (hugBtn) {
+  hugBtn.onclick = () => {
+    messageEl.innerText =
+      "กอดแน่น ๆ ผ่านหน้าจอเลยนะ 🤍\nถึงตัวไม่อยู่ แต่ใจอยู่ตรงนี้เสมอ";
+    
+    for (let i = 0; i < 15; i++) spawnHearts();
+
+    if (navigator.vibrate) {
+      navigator.vibrate([100, 50, 100]);
+    }
+  };
+}
+
+const dailyKey = "dailyLoveShown";
+
+function showDailyLove() {
+  const today = new Date().toDateString();
+
+  if (localStorage.getItem(dailyKey) === today) {
+    messageEl.innerText = "วันนี้เค้าบอกรักไปแล้วน้า 🤍";
+    return;
+  }
+
+  messageEl.innerText =
+    "ข้อความพิเศษของวันนี้ 💗\nไม่ว่าวันนี้จะเจออะไร เค้าอยู่ข้างนาวเสมอ";
+
+  localStorage.setItem(dailyKey, today);
+  spawnHearts();
+  secretBtn.onclick = showDailyLove;
+
+}
+
+
 
 
 });
