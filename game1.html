@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>คิดถึงเรามั้ย 😏</title>
+<link rel="stylesheet" href="style_v2.css">
+</head>
+<body>
+
+<div class="card">
+  <h2>คิดถึงเรากี่เปอร์เซ็นต์</h2>
+  <div id="percent" style="font-size:48px;margin:20px 0;">🤍</div>
+  <button id="checkBtn">กดดูเลย</button>
+  <p id="text"></p>
+  <br>
+  <a href="index.html">← กลับหน้าแรก</a>
+</div>
+
+<script>
+document.getElementById("checkBtn").onclick = () => {
+  const percent = Math.floor(Math.random() * 21) + 80;
+  document.getElementById("percent").innerText = percent + "%";
+
+  const texts = [
+    "โกหกไม่เนียนเลย 😌",
+    "คิดถึงขนาดนี้ โทรมาได้แล้ว เอ๋าลืมไปอยู่ค่าย",
+    "แค่นี้ก็รู้แล้วแหละอิอิ",
+    "เราไม่อยู่แป๊บเดียวเองนะ",
+    "โอเค ยอมรับว่าดีใจ"
+  ];
+
+  document.getElementById("text").innerText =
+    texts[Math.floor(Math.random() * texts.length)];
+};
+</script>
+
+</body>
+</html>
