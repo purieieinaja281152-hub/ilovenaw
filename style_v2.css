@@ -1,0 +1,149 @@
+body {
+  background: linear-gradient(135deg, #ffd6e8, #fff0f6);
+  font-family: "Segoe UI", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.card {
+  background: white;
+  padding: 35px;
+  max-width: 420px;
+  text-align: center;
+  border-radius: 22px;
+  box-shadow: 0 15px 30px rgba(255, 182, 193, 0.45);
+  z-index: 2;
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: #ff5c8a;
+}
+
+#message {
+  font-size: 18px;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+button {
+  margin-top: 22px;
+  padding: 10px 22px;
+  background: #ff85a2;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #ff5c8a;
+}
+
+.countdown {
+  margin-top: 25px;
+  color: #888;
+  font-size: 14px;
+}
+
+/* หัวใจลอย */
+.heart {
+  position: fixed;
+  bottom: 0;
+  font-size: 20px;
+  animation: floatUp 4s linear;
+  z-index: 1;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+}
+
+.buttons button {
+  font-size: 14px;
+  padding: 10px;
+  border-radius: 20px;
+  background: #ff85a2;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.buttons button:hover {
+  background: #ff5c8a;
+}
+
+
+.buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.buttons button {
+  font-size: 14px;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+/* กล่องรูป */
+#photoBox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* รูป */
+#photoBox img {
+  max-width: 90vw;
+  max-height: 70vh;
+  object-fit: contain;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* ข้อความใต้รูป */
+#photoCaption {
+  margin-top: 12px;
+  color: white;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+#photoBox img {
+  animation: pop 0.3s ease;
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+#photoBox {
+  pointer-events: none;
+}
+
+#photoBox img {
+  pointer-events: auto;
+}
