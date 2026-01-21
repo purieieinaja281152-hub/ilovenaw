@@ -133,3 +133,37 @@ h1 {
   50% { transform: translateY(-6px); }
   100% { transform: translateY(0); }
 }
+
+.floating-text {
+  position: fixed;
+  font-size: 14px;
+  color: #ff85a2;
+  opacity: 0.6;
+  animation: floatText 6s ease-in-out infinite;
+}
+
+.floating-text.left {
+  left: 10px;
+  top: 40%;
+}
+
+.floating-text.right {
+  right: 10px;
+  top: 55%;
+}
+
+@keyframes floatText {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0); }
+}
+
+.card {
+  animation: breathe 4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.015); }
+  100% { transform: scale(1); }
+}

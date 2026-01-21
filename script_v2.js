@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const musicBtn = document.getElementById("musicBtn");
   const bgMusic = document.getElementById("bgMusic");
   const secretBtn = document.getElementById("secretBtn");
+  
 
   const photoBtn = document.getElementById("photoBtn");
   const photoBox = document.getElementById("photoBox");
