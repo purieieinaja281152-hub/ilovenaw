@@ -1,3 +1,4 @@
+window.onload = () => {
 const startDate = new Date("2026-02-06T05:00:00");
 const endDate   = new Date("2026-02-07T17:00:00");
 
@@ -177,4 +178,5 @@ photoBtn.onclick = () => {
   photoBox.style.display = "block";
 
   spawnHearts();
+};
 };
