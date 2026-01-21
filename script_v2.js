@@ -32,10 +32,19 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   const photos = [
+    
     { src: "photo1.jpg", caption: "อยากไปแอ่วกับนาวอีกกก" },
-    { src: "photo2.jpg", caption: "นาวน่ารักมาก คิดถึงสุด ๆ" },
-    { src: "photo3.jpg", caption: "หัวใจเราอยู่ใกล้นาวเสมอ" }
-  ];
+    { src: "photo2.jpg", caption: "นาวน่ารักมากกกกกก" },
+    { src: "photo3.jpg", caption: "หัวใจเราอยู่ใกล้นาวเสมอ" },
+     { src: "photo4.jpg", caption: "เราไม่อยู่วัน2วัน นาวอย่าทิ้งเค้านะคิคิ" },
+      { src: "photo5.jpg", caption: "คิดถึงนาวสุดๆๆๆเลยยยอยากกอดด" },
+       { src: "photo6.jpg", caption: "รักนาวมากๆเลยยยยยยยจุ้บๆๆๆ" }
+  ];      
+       let shuffledPhotos = [];
+       function resetPhotos() {
+  shuffledPhotos = [...photos].sort(() => Math.random() - 0.5);
+}
+
 
   // ===== util =====
   function resetExtras() {
@@ -125,17 +134,19 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (photoBtn) {
-    photoBtn.onclick = () => {
-      photoBox.onclick = () => {
-  photoBox.style.display = "none";
-};
+  resetPhotos();
 
-      const r = photos[Math.floor(Math.random() * photos.length)];
-      photo.src = r.src;
-      photoCaption.innerText = r.caption;
-      photoBox.style.display = "block";
-      spawnHearts();
-    };
-  }
+  photoBtn.onclick = () => {
+    if (shuffledPhotos.length === 0) {
+      resetPhotos();
+    }
+
+    const next = shuffledPhotos.pop();
+    photo.src = next.src;
+    photoCaption.innerText = next.caption;
+    photoBox.style.display = "block";
+  };
+}
+
 
 });
