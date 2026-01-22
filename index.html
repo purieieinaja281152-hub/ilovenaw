@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<title>จดหมายถึงนาว 🤍</title>
+<title>ถึงนาว 🤍</title>
 
 <style>
 * {
@@ -17,10 +17,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
 }
 
-/* ===== หน้าทั้งหมด ===== */
+/* ===== page ===== */
 .page {
   display: none;
   width: 100%;
@@ -34,196 +33,150 @@ body {
   display: flex;
 }
 
-/* ===== ซองจดหมาย ===== */
-.envelope {
-  width: 260px;
-  height: 180px;
-  background: #ffb6c9;
-  border-radius: 12px;
-  position: relative;
-  box-shadow: 0 20px 40px rgba(255, 105, 180, 0.4);
+/* ===== menu ===== */
+.menu-title {
+  font-size: 26px;
+  color: #ff4f80;
+  margin-bottom: 30px;
 }
 
-.envelope::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #ffc6d9, #ff9fbf);
-  clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%);
-  border-radius: 12px;
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 140px);
+  gap: 20px;
 }
 
-.open-btn {
-  margin-top: 30px;
-  padding: 12px 30px;
-  background: #ff5c8a;
+.menu-card {
+  width: 140px;
+  height: 140px;
+  background: #ff7fa6;
+  border-radius: 24px;
   color: white;
-  border: none;
-  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 14px;
   font-size: 16px;
   cursor: pointer;
+  box-shadow: 0 15px 30px rgba(255, 105, 180, 0.4);
 }
 
-.open-btn:hover {
-  background: #ff3b75;
+.menu-card:hover {
+  transform: scale(1.05);
 }
 
-.subtitle {
-  margin-top: 18px;
-  color: #ff4f80;
-  font-size: 16px;
-}
-
-/* ===== หน้าใส่รหัส ===== */
-.password-card {
+/* ===== message page ===== */
+.message-box {
   background: white;
-  padding: 30px;
-  border-radius: 24px;
+  width: 80%;
+  max-width: 520px;
+  padding: 40px 30px;
+  border-radius: 28px;
   text-align: center;
-  box-shadow: 0 15px 30px rgba(255, 182, 193, 0.45);
+  box-shadow: 0 20px 40px rgba(255, 182, 193, 0.45);
 }
 
-.code-inputs {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  margin: 20px 0;
+.message-text {
+  font-size: 26px;
+  color: #ff4f80;
+  line-height: 1.6;
 }
 
-.code-inputs input {
-  width: 40px;
-  height: 50px;
-  font-size: 22px;
-  text-align: center;
-  border-radius: 10px;
-  border: 2px solid #ffd1e1;
-}
-
-.hint {
+.message-hint {
+  margin-top: 20px;
   font-size: 14px;
   color: #888;
-  margin-bottom: 10px;
-}
-
-.error {
-  color: #ff4f80;
-  font-size: 14px;
-  height: 18px;
-}
-
-/* ===== หน้าเข้าได้แล้ว ===== */
-.success {
-  text-align: center;
-}
-
-.success h1 {
-  color: #ff4f80;
-}
-
-.heart {
-  position: fixed;
-  bottom: 0;
-  font-size: 22px;
-  animation: floatUp 4s linear;
-}
-
-@keyframes floatUp {
-  from { transform: translateY(0); opacity: 1; }
-  to { transform: translateY(-100vh); opacity: 0; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- เสียง -->
-<audio id="openSound" src="open.mp3"></audio>
+<!-- ===== หน้าเมนู ===== -->
+<div class="page active" id="menuPage">
+  <div class="menu-title">เลือกเมนู</div>
 
-<!-- หน้า 1 -->
-<div class="page active" id="page-envelope">
-  <div class="envelope"></div>
-  <div class="subtitle">💌 จดหมายสำหรับสุดที่รักนาว</div>
-  <button class="open-btn" id="openBtn">เปิดเลย</button>
-</div>
-
-<!-- หน้า 2 -->
-<div class="page" id="page-password">
-  <div class="password-card">
-    <h2>กรอกรหัสผ่าน</h2>
-
-    <div class="code-inputs">
-      <input maxlength="1">
-      <input maxlength="1">
-      <input maxlength="1">
-      <input maxlength="1">
-      <input maxlength="1">
-      <input maxlength="1">
+  <div class="menu-grid">
+    <div class="menu-card" id="timeMessageBtn">
+      💌<br>ข้อความจากใจ
     </div>
-
-    <div class="hint">💡 คำใบ้: วันครบรอบ</div>
-    <div class="error" id="errorMsg"></div>
-
-    <button class="open-btn" id="confirmBtn">ยืนยัน</button>
   </div>
 </div>
 
-<!-- หน้า 3 -->
-<div class="page" id="page-success">
-  <div class="success">
-    <h1>ยินดีต้อนรับนะ 🤍</h1>
-    <p>จดหมายนี้ทำมาเพื่อนาวคนเดียวเลย</p>
+<!-- ===== หน้าข้อความตามเวลา ===== -->
+<div class="page" id="messagePage">
+  <div class="message-box">
+    <div class="message-text" id="timeMessage"></div>
+    <div class="message-hint">
+      ข้อความนี้จะเปลี่ยนไปตามเวลา<br>
+      เปลี่ยนทุก ๆ 1 ชั่วโมง 🤍
+    </div>
   </div>
 </div>
 
 <script>
-const correctCode = "141068";
+/* ===== ข้อความตามวัน + ชั่วโมง ===== */
+const messages = {
+  6: {
+    6: "เช้านี้ขอให้ที่รักตื่นมาสดชื่นนน สดใสนะะ 🤍",
+    7: "คิดถึงงงงนาวตอนนี้นาวอยู่ไหนแล้วนะะ",
+    8: "เช้านี้อย่าลืมยิ้มให้ตัวเองเย้อๆนะะ",
+    9: "ตั้งใจเรียนนะะะ ถ้ามีงานอะไรก็ทําให้เสร็จห้ามดอง ถ้ามีกิจกรรมก็ขอให้นาวเต็มที่นะ",
+    10: "นาวเป็นยังไงบ้างนะะะเราอยากรู้จังเลย เราคิดถึงนะ",
+    11: "ใกล้เที่ยงแล้วหิวมั้ยย มากินเรามะะะ",
+    12: "ตอนเที่ยงแล้ววกินข้าวรึยังเอ่ยย กินเยอะๆเลยนะะ",
+    13: "บ่ายแล้วว น่าจะใกล้เข้าเรียนแระ",
+    14: "สู้ๆๆๆนะะะเราเป็นกําลังใจให้้",
+    15: "คิดถึงนาวววววววอ่ะะะะะะะะ",
+    16: "ใกล้เย็นแล้วว เลิกเรียนรึยังเอ่ยยวันนี้เป็นยังไงบ้างง",
+    17: "นาวกลับบ้านยังนะ แล้ววันนี้ไปกินข้าวเย็นที่ไหน ไปกลับใครร เครียดดด",
+    18: "เย็นแล้วนะ กลับบ้านยังง เราคิดถึงง เราอยากโทรร",
+    19: "ทุ่มนึงแล้วนะ มากอดกันนน",
+    20: "คิดถึงนาวๆๆๆๆๆๆ จุ้ฟฟฟฟ",
+    21: "นาวใกล้เข้านอนแล้วนะ อย่าแอบคุยกับผู้ชายคนอื่นนนะะะ",
+    22: "หลับรึยังเอ่ยย ขอให้นาวหลับฝันดี เราไปเจอกันในฝันดีกว่าา",
+    23: "หลับปุ๋ยยยยังงงง คืนนี้เราไม่ได้กอด แต่เราจะกอดนาววว"
+  },
+  7: {
+    6: "อรุณสวัสดิ์ที่รักกกกก",
+    7: "เมื่อไหร่เราจะได้กลับบ้านนนนน คิดถึงแฟน",
+    8: "ขอให้วันนี้นาวอารมณ์ดีทั้งวันนน จุ้ฟๆ",
+    9: "ถึงตัวเราจะอยู่ไกลแต่หัวใจเราใกล้กุันน",
+    10: "คิดถึงงงงง คิดถึงกันมั้ยเอ่ยยมากอดๆกันน",
+    11: "เหงามั้ยยที่รักก รอเค้าหน่อยน้าา ฮึบๆไว้้",
+    12: "อย่าลืมกินข้าวเที่ยงด้วยน้าา ระวังปวดท้องถ้าไม่กินน",
+    13: "รักนาวนะะะะ รักมากๆๆๆ",
+    14: "เพราะจะได้กลับไปกอด",
+    15: "นาววๆๆๆๆๆๆ กอดกันนนแน่นๆๆๆเลยย",
+    16: "เราน่าจะใกล้ได้กลับบ้านแล้วว เราคิดถึงที่รักมากกกก",
+    17: "เราถึงรึยัง53426723542",
+    18: "6โมงแล้วน่าจะถึงละแหละ",
+    19: "ถึงแล้วววว100% "
 
-const openBtn = document.getElementById("openBtn");
-const openSound = document.getElementById("openSound");
-
-const pageEnvelope = document.getElementById("page-envelope");
-const pagePassword = document.getElementById("page-password");
-const pageSuccess = document.getElementById("page-success");
-
-openBtn.onclick = () => {
-  openSound.play();
-  pageEnvelope.classList.remove("active");
-  pagePassword.classList.add("active");
-};
-
-const inputs = document.querySelectorAll(".code-inputs input");
-inputs.forEach((input, i) => {
-  input.addEventListener("input", () => {
-    if (input.value && i < inputs.length - 1) {
-      inputs[i + 1].focus();
-    }
-  });
-});
-
-document.getElementById("confirmBtn").onclick = () => {
-  const entered = [...inputs].map(i => i.value).join("");
-  const errorMsg = document.getElementById("errorMsg");
-
-  if (entered === correctCode) {
-    pagePassword.classList.remove("active");
-    pageSuccess.classList.add("active");
-    celebrate();
-  } else {
-    errorMsg.innerText = "ผิดแล้วนะ ลองนึกถึงวันสำคัญอีกที 😳";
   }
 };
 
-function celebrate() {
-  for (let i = 0; i < 30; i++) {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerText = "💗";
-    heart.style.left = Math.random() * 100 + "vw";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 4000);
+/* ===== element ===== */
+const menuPage = document.getElementById("menuPage");
+const messagePage = document.getElementById("messagePage");
+const timeMessageEl = document.getElementById("timeMessage");
+
+document.getElementById("timeMessageBtn").onclick = () => {
+  menuPage.classList.remove("active");
+  messagePage.classList.add("active");
+  showTimeMessage();
+};
+
+function showTimeMessage() {
+  const now = new Date();
+  const day = now.getDate();
+  const hour = now.getHours();
+
+  if (messages[day] && messages[day][hour]) {
+    timeMessageEl.innerText = messages[day][hour];
+  } else {
+    timeMessageEl.innerText = "ตอนนี้เราก็ยังคิดถึงนาวอยู่นะ 🤍";
   }
 }
 </script>
