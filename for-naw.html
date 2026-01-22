@@ -42,16 +42,6 @@ body {
   border-radius: 12px;
   position: relative;
   box-shadow: 0 20px 40px rgba(255, 105, 180, 0.4);
-  .envelope.open {
-  animation: openEnvelope 0.6s ease forwards;
-}
-
-@keyframes openEnvelope {
-  0% { transform: scale(1); }
-  60% { transform: scale(1.15); }
-  100% { transform: scale(0.9); opacity: 0; }
-}
-
 }
 
 .envelope::before {
@@ -200,16 +190,9 @@ const pageSuccess = document.getElementById("page-success");
 
 openBtn.onclick = () => {
   openSound.play();
-
-  const env = document.querySelector(".envelope");
-  env.classList.add("open");
-
-  setTimeout(() => {
-    pageEnvelope.classList.remove("active");
-    pagePassword.classList.add("active");
-  }, 600);
+  pageEnvelope.classList.remove("active");
+  pagePassword.classList.add("active");
 };
-
 
 const inputs = document.querySelectorAll(".code-inputs input");
 inputs.forEach((input, i) => {
