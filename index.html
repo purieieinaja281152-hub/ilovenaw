@@ -2,229 +2,201 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<title>จดหมายถึงนาว 🤍</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ถึงนาว 🤍</title>
 
 <style>
-* {
-  box-sizing: border-box;
-  font-family: "Segoe UI", sans-serif;
+*{box-sizing:border-box;font-family:sans-serif}
+body{
+  margin:0;height:100vh;
+  background:radial-gradient(circle at top,#ffd6e8,#fff);
+  display:flex;justify-content:center;align-items:center;
+  overflow:hidden
 }
 
-body {
-  margin: 0;
-  height: 100vh;
-  background: linear-gradient(135deg, #ffd6e8, #fff0f6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+.page{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  opacity:0;pointer-events:none;
+  transition:.6s ease
+}
+.page.active{
+  opacity:1;pointer-events:auto
 }
 
-/* ===== หน้าทั้งหมด ===== */
-.page {
-  display: none;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+/* envelope */
+.envelope{
+  width:320px;height:220px;
+  background:#ffb3c7;
+  border-radius:22px;
+  box-shadow:0 30px 80px rgba(255,105,180,.5);
+  position:relative;
+  animation:float 3s ease-in-out infinite
+}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-14px)}
+}
+.envelope::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(135deg,#ffd1e1,#ff8fb1);
+  clip-path:polygon(0 0,50% 60%,100% 0,100% 100%,0 100%);
+  border-radius:22px
+}
+.envelope.open{
+  animation:open .6s forwards
+}
+@keyframes open{
+  0%{transform:scale(1)}
+  60%{transform:scale(1.15)}
+  100%{transform:scale(.9);opacity:0}
 }
 
-.page.active {
-  display: flex;
+.btn{
+  margin-top:26px;
+  padding:14px 40px;
+  border:none;border-radius:40px;
+  background:#ff5c8a;color:#fff;
+  font-size:17px;
+  transition:.15s
+}
+.btn:active{transform:scale(.9);background:#ff3b75}
+
+/* card */
+.card{
+  background:#fff;
+  padding:34px 26px;
+  border-radius:32px;
+  box-shadow:0 30px 60px rgba(255,182,193,.45)
 }
 
-/* ===== ซองจดหมาย ===== */
-.envelope {
-  width: 260px;
-  height: 180px;
-  background: #ffb6c9;
-  border-radius: 12px;
-  position: relative;
-  box-shadow: 0 20px 40px rgba(255, 105, 180, 0.4);
+/* menu */
+.menu{
+  display:grid;
+  grid-template-columns:repeat(2,150px);
+  gap:20px
+}
+.menu div{
+  height:150px;
+  background:#ff7fa6;
+  border-radius:30px;
+  color:#fff;
+  display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  font-size:18px;
+  box-shadow:0 20px 50px rgba(255,105,180,.45);
+  transition:.15s
+}
+.menu div:active{transform:scale(.9);background:#ff5c8a}
+
+/* message */
+.msg{
+  font-size:24px;
+  color:#ff4f80;
+  line-height:1.7;
+  animation:type .6s ease
+}
+@keyframes type{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:none}
 }
 
-.envelope::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #ffc6d9, #ff9fbf);
-  clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%);
-  border-radius: 12px;
+/* hearts */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  animation:up 4s linear;
+  font-size:22px
 }
-
-.open-btn {
-  margin-top: 30px;
-  padding: 12px 30px;
-  background: #ff5c8a;
-  color: white;
-  border: none;
-  border-radius: 30px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.open-btn:hover {
-  background: #ff3b75;
-}
-
-.subtitle {
-  margin-top: 18px;
-  color: #ff4f80;
-  font-size: 16px;
-}
-
-/* ===== หน้าใส่รหัส ===== */
-.password-card {
-  background: white;
-  padding: 30px;
-  border-radius: 24px;
-  text-align: center;
-  box-shadow: 0 15px 30px rgba(255, 182, 193, 0.45);
-}
-
-.code-inputs {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  margin: 20px 0;
-}
-
-.code-inputs input {
-  width: 40px;
-  height: 50px;
-  font-size: 22px;
-  text-align: center;
-  border-radius: 10px;
-  border: 2px solid #ffd1e1;
-}
-
-.hint {
-  font-size: 14px;
-  color: #888;
-  margin-bottom: 10px;
-}
-
-.error {
-  color: #ff4f80;
-  font-size: 14px;
-  height: 18px;
-}
-
-/* ===== หน้าเข้าได้แล้ว ===== */
-.success {
-  text-align: center;
-}
-
-.success h1 {
-  color: #ff4f80;
-}
-
-.heart {
-  position: fixed;
-  bottom: 0;
-  font-size: 22px;
-  animation: floatUp 4s linear;
-}
-
-@keyframes floatUp {
-  from { transform: translateY(0); opacity: 1; }
-  to { transform: translateY(-100vh); opacity: 0; }
+@keyframes up{
+  to{transform:translateY(-120vh);opacity:0}
 }
 </style>
 </head>
 
 <body>
 
-<!-- เสียง -->
-<audio id="openSound" src="open.mp3"></audio>
+<audio id="click" src="click.mp3"></audio>
+<audio id="open" src="open.mp3"></audio>
+<audio id="ok" src="success.mp3"></audio>
 
-<!-- หน้า 1 -->
-<div class="page active" id="page-envelope">
-  <div class="envelope"></div>
-  <div class="subtitle">💌 จดหมายสำหรับสุดที่รักนาว</div>
-  <button class="open-btn" id="openBtn">เปิดเลย</button>
+<!-- envelope -->
+<div class="page active" id="p1">
+  <div class="envelope" id="env"></div>
+  <button class="btn" onclick="openLetter()">เปิดจดหมาย</button>
 </div>
 
-<!-- หน้า 2 -->
-<div class="page" id="page-password">
-  <div class="password-card">
-    <h2>กรอกรหัสผ่าน</h2>
-
-    <div class="code-inputs">
-      <input maxlength="1">
-      <input maxlength="1">
-      <input maxlength="1">
-      <input maxlength="1">
-      <input maxlength="1">
-      <input maxlength="1">
-    </div>
-
-    <div class="hint">💡 คำใบ้: วันครบรอบ</div>
-    <div class="error" id="errorMsg"></div>
-
-    <button class="open-btn" id="confirmBtn">ยืนยัน</button>
+<!-- password -->
+<div class="page" id="p2">
+  <div class="card">
+    <h3>รหัสลับของเรา</h3>
+    <input id="code" style="font-size:20px;padding:10px;border-radius:12px;border:2px solid #ffd1e1">
+    <button class="btn" onclick="check()">ยืนยัน</button>
   </div>
 </div>
 
-<!-- หน้า 3 -->
-<div class="page" id="page-success">
-  <div class="success">
-    <h1>ยินดีต้อนรับนะ 🤍</h1>
-    <p>จดหมายนี้ทำมาเพื่อนาวคนเดียวเลย</p>
+<!-- menu -->
+<div class="page" id="p3">
+  <h2 style="color:#ff4f80">ถึงนาว 🤍</h2>
+  <div class="menu">
+    <div onclick="openMsg()">💌<br>ข้อความ</div>
+    <div>🎵<br>เพลง</div>
+    <div>🖼<br>รูป</div>
+    <div>🎮<br>เกม</div>
+  </div>
+</div>
+
+<!-- message -->
+<div class="page" id="p4">
+  <div class="card">
+    <div class="msg" id="msg"></div>
+    <button class="btn" onclick="go('p3')">กลับ</button>
   </div>
 </div>
 
 <script>
-const correctCode = "141068";
+const click=s=>{s.currentTime=0;s.play()}
+const snd={
+  click:document.getElementById("click"),
+  open:document.getElementById("open"),
+  ok:document.getElementById("ok")
+}
 
-const openBtn = document.getElementById("openBtn");
-const openSound = document.getElementById("openSound");
+function go(id){
+  click(snd.click)
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"))
+  document.getElementById(id).classList.add("active")
+}
 
-const pageEnvelope = document.getElementById("page-envelope");
-const pagePassword = document.getElementById("page-password");
-const pageSuccess = document.getElementById("page-success");
+function openLetter(){
+  click(snd.open)
+  const e=document.getElementById("env")
+  e.classList.add("open")
+  setTimeout(()=>go("p2"),600)
+}
 
-openBtn.onclick = () => {
-  openSound.play();
-  pageEnvelope.classList.remove("active");
-  pagePassword.classList.add("active");
-};
-
-const inputs = document.querySelectorAll(".code-inputs input");
-inputs.forEach((input, i) => {
-  input.addEventListener("input", () => {
-    if (input.value && i < inputs.length - 1) {
-      inputs[i + 1].focus();
+function check(){
+  if(code.value==="141068"){
+    click(snd.ok)
+    go("p3")
+    for(let i=0;i<20;i++){
+      const h=document.createElement("div")
+      h.className="heart"
+      h.innerText="💗"
+      h.style.left=Math.random()*100+"vw"
+      document.body.appendChild(h)
+      setTimeout(()=>h.remove(),4000)
     }
-  });
-});
-
-document.getElementById("confirmBtn").onclick = () => {
-  const entered = [...inputs].map(i => i.value).join("");
-  const errorMsg = document.getElementById("errorMsg");
-
-  if (entered === correctCode) {
-    pagePassword.classList.remove("active");
-    pageSuccess.classList.add("active");
-    celebrate();
-  } else {
-    errorMsg.innerText = "ผิดแล้วนะ ลองนึกถึงวันสำคัญอีกที 😳";
+  }else{
+    click(snd.click)
   }
-};
+}
 
-function celebrate() {
-  for (let i = 0; i < 30; i++) {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerText = "💗";
-    heart.style.left = Math.random() * 100 + "vw";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 4000);
-  }
+function openMsg(){
+  click(snd.click)
+  go("p4")
+  msg.innerText="เราตั้งใจทำเว็บนี้ให้นาวจริงๆนะ 🤍"
 }
 </script>
 
