@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ถึงนาว 🤍</title>
 
 <style>
@@ -21,7 +21,7 @@ body {
   overflow: hidden;
 }
 
-/* ===== page system ===== */
+/* ===== Page System ===== */
 .page {
   display: none;
   width: 100%;
@@ -32,112 +32,49 @@ body {
   flex-direction: column;
   text-align: center;
 }
+.page.active { display: flex; }
 
-.page.active {
-  display: flex;
-}
-
-/* ===== menu ===== */
-.menu-title {
-  font-size: 28px;
-  color: #ff4f80;
-  margin-bottom: 30px;
-}
-
-.menu-card {
-  width: 180px;
-  height: 180px;
-  background: #ff7fa6;
-  border-radius: 28px;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 18px;
-  cursor: pointer;
-  box-shadow: 0 20px 40px rgba(255, 105, 180, 0.45);
-  transition: transform 0.3s;
-}
-
-.menu-card:hover {
-  transform: scale(1.05);
-}
-
-/* ===== message ===== */
-.message-box {
-  background: white;
-  width: 100%;
-  max-width: 520px;
-  padding: 40px 24px;
-  border-radius: 32px;
-  box-shadow: 0 25px 50px rgba(255, 182, 193, 0.5);
-  animation: pop 0.4s ease;
-}
-
-@keyframes pop {
-  from { transform: scale(0.9); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
-.message-text {
-  font-size: 24px;
-  color: #ff4f80;
-  line-height: 1.7;
-}
-
-.back-btn {
-  margin-top: 20px;
-  border: none;
-  background: #ff5c8a;
-  color: white;
-  padding: 10px 26px;
-  border-radius: 30px;
-  font-size: 16px;
-}
-
-/* ===== envelope ===== */
+/* ===== Envelope ===== */
 .envelope {
-  width: 260px;
-  height: 180px;
+  width: 280px;
+  height: 200px;
   background: #ffb6c9;
-  border-radius: 14px;
-  box-shadow: 0 20px 40px rgba(255, 105, 180, 0.4);
+  border-radius: 16px;
   position: relative;
+  box-shadow: 0 25px 50px rgba(255,105,180,.4);
 }
-
 .envelope::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, #ffc6d9, #ff9fbf);
-  clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%);
-  border-radius: 14px;
+  background: linear-gradient(135deg,#ffc6d9,#ff9fbf);
+  clip-path: polygon(0 0,50% 55%,100% 0,100% 100%,0 100%);
+  border-radius: 16px;
 }
 
-.open-btn {
+.btn {
   margin-top: 30px;
-  padding: 12px 30px;
+  padding: 12px 34px;
+  border-radius: 30px;
+  border: none;
   background: #ff5c8a;
   color: white;
-  border: none;
-  border-radius: 30px;
   font-size: 16px;
 }
 
-.password-card {
+/* ===== Password ===== */
+.card {
   background: white;
   padding: 30px;
   border-radius: 28px;
-  box-shadow: 0 20px 40px rgba(255, 182, 193, 0.45);
+  box-shadow: 0 20px 40px rgba(255,182,193,.45);
 }
-
 .code-inputs {
   display: flex;
   gap: 10px;
   justify-content: center;
   margin: 20px 0;
 }
-
 .code-inputs input {
   width: 40px;
   height: 50px;
@@ -146,20 +83,51 @@ body {
   border-radius: 10px;
   border: 2px solid #ffd1e1;
 }
+.error { color:#ff4f80; height:18px; }
 
-.error {
+/* ===== Menu ===== */
+.menu-title {
+  font-size: 26px;
   color: #ff4f80;
-  height: 18px;
+  margin-bottom: 20px;
+}
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 150px);
+  gap: 20px;
+}
+.menu-card {
+  height: 150px;
+  background: #ff7fa6;
+  border-radius: 26px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 20px 40px rgba(255,105,180,.45);
 }
 
-/* ===== hearts ===== */
+/* ===== Message ===== */
+.message-box {
+  background: white;
+  padding: 36px 24px;
+  border-radius: 30px;
+  max-width: 520px;
+  box-shadow: 0 25px 50px rgba(255,182,193,.5);
+}
+.message-text {
+  font-size: 24px;
+  color: #ff4f80;
+  line-height: 1.7;
+}
+
+/* ===== Hearts ===== */
 .heart {
   position: fixed;
   bottom: 0;
   font-size: 22px;
   animation: floatUp 4s linear;
 }
-
 @keyframes floatUp {
   from { transform: translateY(0); opacity: 1; }
   to { transform: translateY(-100vh); opacity: 0; }
@@ -169,102 +137,49 @@ body {
 
 <body>
 
-<!-- ===== MENU ===== -->
-<div class="page active" id="menu">
-  <div class="menu-title">ถึงนาว 🤍</div>
-  <div class="menu-card" onclick="goMessage()">💌<br>ข้อความจากใจ</div>
-  <button class="open-btn" onclick="goEnvelope()">📩 จดหมายลับ</button>
-</div>
-
-<!-- ===== MESSAGE ===== -->
-<div class="page" id="message">
-  <div class="message-box">
-    <div class="message-text" id="timeMessage"></div>
-    <button class="back-btn" onclick="goMenu()">กลับ</button>
-  </div>
-</div>
-
-<!-- ===== ENVELOPE ===== -->
-<div class="page" id="envelope">
+<!-- หน้า 1 : ซอง -->
+<div class="page active" id="envelopePage">
   <div class="envelope"></div>
-  <button class="open-btn" onclick="goPassword()">เปิดจดหมาย</button>
+  <button class="btn" onclick="go('passwordPage')">เปิดจดหมาย</button>
 </div>
 
-<!-- ===== PASSWORD ===== -->
-<div class="page" id="password">
-  <div class="password-card">
+<!-- หน้า 2 : รหัส -->
+<div class="page" id="passwordPage">
+  <div class="card">
     <h3>กรอกรหัสผ่าน</h3>
     <div class="code-inputs">
       <input maxlength="1"><input maxlength="1"><input maxlength="1">
       <input maxlength="1"><input maxlength="1"><input maxlength="1">
     </div>
     <div class="error" id="error"></div>
-    <button class="open-btn" onclick="checkCode()">ยืนยัน</button>
+    <button class="btn" onclick="checkCode()">ยืนยัน</button>
   </div>
 </div>
 
-<!-- ===== SUCCESS ===== -->
-<div class="page" id="success">
-  <h1>รักนาวนะ 🤍</h1>
+<!-- หน้า 3 : เมนู -->
+<div class="page" id="menuPage">
+  <div class="menu-title">ถึงนาว 🤍</div>
+  <div class="menu-grid">
+    <div class="menu-card" onclick="openMessage()">💌<br>ข้อความตามวัน</div>
+    <div class="menu-card">🎵<br>เพลง</div>
+    <div class="menu-card">🖼<br>ความทรงจำ</div>
+    <div class="menu-card">🎮<br>มินิเกม</div>
+  </div>
+</div>
+
+<!-- หน้า 4 : ข้อความ -->
+<div class="page" id="messagePage">
+  <div class="message-box">
+    <div class="message-text" id="timeMessage"></div>
+    <button class="btn" onclick="go('menuPage')">กลับเมนู</button>
+  </div>
 </div>
 
 <script>
-const pages = ["menu","message","envelope","password","success"];
-const show = id => pages.forEach(p =>
+const pages = ["envelopePage","passwordPage","menuPage","messagePage"];
+const go = id => pages.forEach(p =>
   document.getElementById(p).classList.toggle("active", p===id)
 );
-
-const messages = {
-  6: {
-    6: "เช้านี้ขอให้ที่รักตื่นมาสดชื่นนน สดใสนะะ 🤍",
-    7: "คิดถึงงงงนาวตอนนี้นาวอยู่ไหนแล้วนะะ",
-    8: "เช้านี้อย่าลืมยิ้มให้ตัวเองเย้อๆนะะ",
-    9: "ตั้งใจเรียนนะะะ ถ้ามีงานอะไรก็ทําให้เสร็จห้ามดอง ถ้ามีกิจกรรมก็ขอให้นาวเต็มที่นะ",
-    10: "นาวเป็นยังไงบ้างนะะะเราอยากรู้จังเลย เราคิดถึงนะ",
-    11: "ใกล้เที่ยงแล้วหิวมั้ยย มากินเรามะะะ",
-    12: "ตอนเที่ยงแล้ววกินข้าวรึยังเอ่ยย กินเยอะๆเลยนะะ",
-    13: "บ่ายแล้วว น่าจะใกล้เข้าเรียนแระ",
-    14: "สู้ๆๆๆนะะะเราเป็นกําลังใจให้้",
-    15: "คิดถึงนาวววววววอ่ะะะะะะะะ",
-    16: "ใกล้เย็นแล้วว เลิกเรียนรึยังเอ่ยยวันนี้เป็นยังไงบ้างง",
-    17: "นาวกลับบ้านยังนะ แล้ววันนี้ไปกินข้าวเย็นที่ไหน ไปกลับใครร เครียดดด",
-    18: "เย็นแล้วนะ กลับบ้านยังง เราคิดถึงง เราอยากโทรร",
-    19: "ทุ่มนึงแล้วนะ มากอดกันนน",
-    20: "คิดถึงนาวๆๆๆๆๆๆ จุ้ฟฟฟฟ",
-    21: "นาวใกล้เข้านอนแล้วนะ อย่าแอบคุยกับผู้ชายคนอื่นนนนะะะ",
-    22: "หลับรึยังเอ่ยย ขอให้นาวหลับฝันดี เราไปเจอกันในฝันดีกว่าา",
-    23: "หลับปุ๋ยยยยังงงง คืนนี้เราไม่ได้กอด แต่เราจะกอดนาววว"
-  },
-  0: {
-    6: "อรุณสวัสดิ์ที่รักกกกก",
-    7: "เมื่อไหร่เราจะได้กลับบ้านนนนน คิดถึงแฟน",
-    8: "ขอให้วันนี้นาวอารมณ์ดีทั้งวันนน จุ้ฟๆ",
-    9: "ถึงตัวเราจะอยู่ไกลแต่หัวใจเราใกล้กุันน",
-    10: "คิดถึงงงงง คิดถึงกันมั้ยเอ่ยยมากอดๆกันน",
-    11: "เหงามั้ยยที่รักก รอเค้าหน่อยน้าา ฮึบๆไว้้",
-    12: "อย่าลืมกินข้าวเที่ยงด้วยน้าา ระวังปวดท้องถ้าไม่กินน",
-    13: "รักนาวนะะะะ รักมากๆๆๆ",
-    14: "เพราะจะได้กลับไปกอด",
-    15: "นาววๆๆๆๆๆๆ กอดกันนนแน่นๆๆๆเลยย",
-    16: "เราน่าจะใกล้ได้กลับบ้านแล้วว เราคิดถึงที่รักมากกกก",
-    17: "เราถึงรึยัง53426723542",
-    18: "6โมงแล้วน่าจะถึงละแหละ",
-    19: "ถึงแล้วววว100%"
-  }
-};
-
-function goMessage() {
-  show("message");
-  const now = new Date();
-  const d = now.getDay();
-  const h = now.getHours();
-  document.getElementById("timeMessage").innerText =
-    messages[d]?.[h] || "ตอนนี้เราก็ยังคิดถึงนาวอยู่นะ 🤍";
-}
-
-const goMenu = () => show("menu");
-const goEnvelope = () => show("envelope");
-const goPassword = () => show("password");
 
 const correctCode = "141068";
 const inputs = document.querySelectorAll(".code-inputs input");
@@ -272,8 +187,8 @@ const inputs = document.querySelectorAll(".code-inputs input");
 function checkCode() {
   const code = [...inputs].map(i=>i.value).join("");
   if(code === correctCode){
-    show("success");
-    for(let i=0;i<30;i++){
+    go("menuPage");
+    for(let i=0;i<20;i++){
       const h=document.createElement("div");
       h.className="heart";
       h.innerText="💗";
@@ -282,9 +197,42 @@ function checkCode() {
       setTimeout(()=>h.remove(),4000);
     }
   } else {
-    document.getElementById("error").innerText="ผิดแล้วนะ ลองคิดดีๆ 😳";
+    document.getElementById("error").innerText="รหัสไม่ถูกนะ 😳";
   }
 }
+
+const messages = {
+  6: {
+    6: "เช้านี้ขอให้ที่รักตื่นมาสดชื่นนน สดใสนะะ 🤍",
+    7: "คิดถึงงงงนาวตอนนี้นาวอยู่ไหนแล้วนะะ",
+    8: "เช้านี้อย่าลืมยิ้มให้ตัวเองเย้อๆนะะ",
+    9: "ตั้งใจเรียนนะะะ ถ้ามีงานอะไรก็ทําให้เสร็จห้ามดอง",
+    10: "นาวเป็นยังไงบ้างนะะ เราคิดถึงนะ",
+    11: "ใกล้เที่ยงแล้วหิวมั้ยย มากินเรามะะะ",
+    12: "กินข้าวเที่ยงด้วยนะะ",
+    13: "บ่ายแล้วว สู้ๆนะ",
+    14: "เราเป็นกำลังใจให้นะ",
+    15: "คิดถึงนาวววว",
+    16: "ใกล้เย็นแล้ว วันนี้เป็นยังไงบ้าง",
+    17: "กลับบ้านยังเอ่ย",
+    18: "เย็นแล้ว คิดถึงง",
+    19: "ทุ่มนึงแล้ว มากอดกัน",
+    20: "คิดถึงนาว จุ้ฟ",
+    21: "ใกล้นอนแล้วนะ",
+    22: "ฝันดีนะ",
+    23: "กอดนาวในฝัน 🤍"
+  }
+};
+
+function openMessage(){
+  go("messagePage");
+  const now = new Date();
+  const d = now.getDay();
+  const h = now.getHours();
+  document.getElementById("timeMessage").innerText =
+    messages[d]?.[h] || "ตอนนี้เราก็ยังคิดถึงนาวอยู่นะ 🤍";
+}
 </script>
+
 </body>
 </html>
