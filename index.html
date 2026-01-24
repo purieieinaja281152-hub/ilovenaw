@@ -290,23 +290,15 @@ body{
 </div> <!-- card ของ p5 -->
 </div> <!-- page p5 -->
 <div class="page" id="pSong">
-  <div class="card song-card">
-    <div class="lyrics" id="lyric"></div>
-
-    <button class="btn" onpointerdown="startSong()">
-      ▶️ เปิดเพลง
-    </button>
-
-    <button class="btn" style="margin-top:14px"
-      onpointerdown="stopSong(); go('p3')">
-      ⬅ กลับเมนู
-    </button>
-  </div>
+  <button class="btn" onclick="stopSong(); go('p3')"
+    style="position:fixed; top:20px; left:20px; z-index:10">
+    ⬅ กลับ
+  </button>
 </div>
 
 <div id="subtitle"></div>
-
 <audio id="song" src="song.mp3"></audio>
+
 
 
   </div>
@@ -416,7 +408,7 @@ const lyrics = [
   { t: 33.0, w: "คิดถึงฉันไหม เวลาที่เธอไม่มีใครให้ทะเลาะ" },
   { t: 40.0, w: "ไปไหนแล้ว ไม่มีไหล่ให้เกาะ แล้วเธอคิดถึงใคร" },
 
-    { t: 52.0, w: "ฟ้าร้องทุกครั้ง มันส่งเสียงดัง" },
+  { t: 52.0, w: "ฟ้าร้องทุกครั้ง มันส่งเสียงดัง" },
   { t: 57.0, w: "เธอโดดมานั่งตักฉัน ฉันก็ทุเรศตัวเองเหมือนกัน" },
   { t: 63.0, w: "ที่ปลอบไปขำไป ฉันรู้ว่าฉันไม่เอาไหนเลย" },
   { t: 70.0, w: "ไม่อบอุ่นได้อย่างนั้น" },
@@ -434,7 +426,7 @@ const lyrics = [
   { t: 136.0, w: "บนหัวนอน เสียงวิทยุเล่นเพลงที่เธอชอบ" },
   { t: 144.0, w: "ถึงฉันไม่ชอบ ก็ยังนั่งฟัง เพราะมันคิดถึงเธอ" },
 
-   { t: 152.0, w: "เมื่อเราต้องห่าง ยิ่งนาน ๆ อาจลืมกัน" },
+  { t: 152.0, w: "เมื่อเราต้องห่าง ยิ่งนาน ๆ อาจลืมกัน" },
   { t: 158.0, w: "เลยไม่แน่ใจ ตอบหน่อยได้ไหม" },
   { t: 165.0, w: "ว่าเธอคิดถึงกัน ไม่ต้องหวาน ไม่ต้องแหววหรอก" },
   { t: 172.0, w: "อยากถามแค่ให้เธอ ตอบหน่อยได้ไหม" },
@@ -459,28 +451,35 @@ const subtitle = document.getElementById("subtitle");
 let currentIndex = -1;
 
 song.ontimeupdate = () => {
-  const t = song.currentTime;
+  const t = song.currentTime
 
-  if (currentIndex + 1 < lyrics.length && t >= lyrics[currentIndex + 1].time) {
-    currentIndex++;
-    subtitle.innerText = lyrics[currentIndex].text;
-    subtitle.classList.remove("fade");
-    subtitle.classList.add("show");
-
-    setTimeout(() => {
-      subtitle.classList.remove("show");
-      subtitle.classList.add("fade");
-    }, 700);
+  let index = -1
+  for (let i = 0; i < lyrics.length; i++) {
+    if (t >= lyrics[i].t) index = i
+    else break
   }
-};
+
+  if (index !== currentIndex) {
+    currentIndex = index
+
+    if (currentIndex >= 0) {
+      subtitle.innerText = lyrics[currentIndex].w
+      subtitle.classList.remove("fade")
+      subtitle.classList.add("show")
+    }
+  }
+}
+
 
 let lyricIndex = 0
 let timer
 
 function openSong(fromUser){
   if(fromUser) playClick()
+  document.body.classList.add("song-mode")
   go("pSong")
 }
+
 
 function startSong(){
   document.body.classList.add("song-mode")
@@ -518,8 +517,10 @@ function stopSong(){
   song.pause()
   song.currentTime = 0
   document.body.classList.remove("song-mode")
-  clearInterval(timer)
+  subtitle.innerText = ""
+  currentIndex = -1
 }
+
 </script>
 
 
