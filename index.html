@@ -244,8 +244,6 @@ function openTimeMsg(){
   playSound(snd.click);
   navigator.vibrate?.(15)
 
-  navigator.vibrate?.(15)
-
   go("p5");
 
   const now = new Date();
@@ -292,12 +290,6 @@ function openLetter(){
   setTimeout(()=>go("p2"),600)
 }
 
-  function openTimeMsg(){
-  click(snd.click)
-  go("p5")
-}
-
-
 
 /* password */
 const inputs=document.querySelectorAll(".code-inputs input")
@@ -311,9 +303,8 @@ inputs.forEach((inp,i)=>{
 function check(){
   const code=[...inputs].map(i=>i.value).join("")
   if(code==="141068"){
-    click(snd.ok)
+    playSound(snd.ok)
     go("p3")
-    celebrate()
     for(let i=0;i<20;i++){
       const h=document.createElement("div")
       h.className="heart"
@@ -334,7 +325,7 @@ function check(){
 
 /* message */
 function openMsg(){
-  click(snd.click)
+  playSound(snd.click)
   go("p4")
   msg.innerText="เราตั้งใจทำเว็บนี้ให้นาวจริงๆนะ 🤍"
 }
