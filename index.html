@@ -511,20 +511,30 @@ const lyrics = [
 const subtitle = document.getElementById("subtitle");
 let currentIndex = -1;
 
-if (index !== currentIndex) {
-  currentIndex = index
+song.ontimeupdate = () => {
+  const t = song.currentTime
 
-  if (currentIndex >= 0) {
-    subtitle.classList.remove("show")
-    subtitle.classList.add("fade")
+  let index = -1
+  for (let i = 0; i < lyrics.length; i++) {
+    if (t >= lyrics[i].t) index = i
+  }
 
-    setTimeout(() => {
-      subtitle.innerText = lyrics[currentIndex].w
-      subtitle.classList.remove("fade")
-      subtitle.classList.add("show")
-    }, 300)
+  if (index !== currentIndex) {
+    currentIndex = index
+
+    if (currentIndex >= 0) {
+      subtitle.classList.remove("show")
+      subtitle.classList.add("fade")
+
+      setTimeout(() => {
+        subtitle.innerText = lyrics[currentIndex].w
+        subtitle.classList.remove("fade")
+        subtitle.classList.add("show")
+      }, 300)
+    }
   }
 }
+
 
 
 
