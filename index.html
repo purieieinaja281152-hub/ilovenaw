@@ -191,7 +191,8 @@ body{
       * ข้อความนี้จะเปลี่ยนตามเวลาของเครื่องนาว
     </div>
 
-    <button class="btn" onclick="go('p3')">กลับเมนู</button>
+    <button class="btn" onclick="playClick(); go('p3')">กลับเมนู</button>
+
   </div>
 </div>
 
@@ -241,22 +242,26 @@ const timeMessages = {
 
 
 function openTimeMsg(){
-  playSound(snd.click)
+  playClick()        // ✅ เสียงออกทันที 100%
 
-  setTimeout(()=>{
-    go("p5")
+  go("p5")
 
-    const now = new Date()
-    const day = now.getDay()
-    const hour = now.getHours()
+  const now = new Date()
+  const day = now.getDay()
+  const hour = now.getHours()
 
-    document.getElementById("timeMsg").innerText =
-      timeMessages[day]?.[hour]
-      || "ไม่ว่าเวลาไหน เราก็คิดถึงนาวนะ 🤍"
-  }, 50)
+  document.getElementById("timeMsg").innerText =
+    timeMessages[day]?.[hour]
+    || "ไม่ว่าเวลาไหน เราก็คิดถึงนาวนะ 🤍"
+}
+
+function playClick(){
+  const s = document.getElementById("click").cloneNode()
+  s.play().catch(()=>{})
 }
 
 </script>
+
 
 
 
@@ -316,7 +321,8 @@ function check(){
     }
   }else{
     err.innerText="ผิดแล้วนะ ลองคิดถึงวันสำคัญอีกที 😳"
-     playSound(snd.click)
+     playClick()
+
      navigator.vibrate?.(15)
 
      navigator.vibrate?.(15)
@@ -326,11 +332,14 @@ function check(){
 
 /* message */
 function openMsg(){
-  playSound(snd.click)
+  playClick()
+
   go("p4")
   msg.innerText="เราตั้งใจทำเว็บนี้ให้นาวจริงๆนะ 🤍"
 }
 </script>
+
+
 
 </body>
 </html>
