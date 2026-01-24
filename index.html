@@ -216,9 +216,8 @@ body{
       * ข้อความนี้จะเปลี่ยนตามเวลาของเครื่องนาว
     </div>
 
-    <button class="btn"
-  onpointerdown="goBackFromMsg()">กลับเมณู
-
+    <button class="btn" onpointerdown="playClick()" onclick="go('p3')">
+  กลับเมนู
 </button>
 
 
@@ -226,11 +225,7 @@ body{
   </div>
 </div>
 
-<script> function goBackFromMsg(){
-  playClick()
-  go("p3")
-}
-
+<script>
 /* ===== ข้อความตามเวลา (เสาร์ + อาทิตย์) ===== */
 const timeMessages = {
   // ศุกร์ (getDay() = 5)
@@ -278,7 +273,13 @@ const images = [
   "img1.jpg",
   "img2.jpg",
   "img3.jpg",
-  "img4.jpg"
+  "img4.jpg",
+  "img5.jpg",
+  "img6.jpg",
+  "img7.jpg",
+  "img8.jpg",
+  "img9.jpg",
+  "img10.jpg"
 ]
 
 function setRandomImage(){
