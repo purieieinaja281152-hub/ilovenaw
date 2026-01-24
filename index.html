@@ -458,11 +458,6 @@ function stopSong(){
   document.body.classList.remove("song-mode")
   clearInterval(timer)
 }
-</script>
-
-
-
-<script>
   const song = document.getElementById("song")
 const lyricBox = document.getElementById("lyric")
 const lyrics = [
@@ -475,6 +470,11 @@ const lyrics = [
   { t: 34.8, w: "ว่าทุกคืน" },
   { t: 38.0, w: "ฉันยังรอ" }
 ]
+</script>
+
+
+
+<script>
 song.ontimeupdate = () => {
   console.log(song.currentTime.toFixed(2))
 }
