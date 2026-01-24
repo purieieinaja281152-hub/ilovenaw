@@ -173,7 +173,8 @@ body{
   <h2 style="color:#ff4f80">เมนู</h2>
 
   <div class="menu">
-    <div onclick="openTimeMsg()">💌<br>ข้อความ</div>
+    <div onpointerdown="openTimeMsg()">💌<br>ข้อความ</div>
+
 
 
     <div>🎵<br>เพลง</div>
@@ -191,7 +192,10 @@ body{
       * ข้อความนี้จะเปลี่ยนตามเวลาของเครื่องนาว
     </div>
 
-    <button class="btn" onclick="playClick(); go('p3')">กลับเมนู</button>
+    <button class="btn" onpointerdown="playClick()" onclick="go('p3')">
+  กลับเมนู
+</button>
+
 
   </div>
 </div>
