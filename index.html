@@ -2,564 +2,107 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ถึงนาว 🤍</title>
+<title>For You ❤️</title>
 
 <style>
-*{box-sizing:border-box;font-family:sans-serif}
+*{
+  box-sizing:border-box;
+  font-family:sans-serif;
+}
+
 body{
-  margin:0;height:100vh;
-  background:radial-gradient(circle at top,#ffd6e8,#fff);
-  display:flex;justify-content:center;align-items:center;
-  overflow:hidden
+  margin:0;
+  background:#111;
+  color:#fff;
+  overflow:hidden;
 }
 
-/* ===== page system ===== */
+/* ---------- PAGE ---------- */
 .page{
-  position:absolute;inset:0;
-  display:flex;flex-direction:column;
-  justify-content:center;align-items:center;
-  opacity:0;pointer-events:none;
-  transition:.6s ease
-}
-.page.active{opacity:1;pointer-events:auto}
-
-/* ===== envelope ===== */
-.envelope{
-  width:320px;height:220px;
-  background:#ffb3c7;
-  border-radius:22px;
-  box-shadow:0 30px 80px rgba(255,105,180,.5);
-  position:relative;
-  animation:float 3s ease-in-out infinite
-}
-@keyframes float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-14px)}
-}
-.envelope::before{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(135deg,#ffd1e1,#ff8fb1);
-  clip-path:polygon(0 0,50% 60%,100% 0,100% 100%,0 100%);
-  border-radius:22px
-}
-.envelope.open{
-  animation:open .6s forwards
-}
-@keyframes open{
-  0%{transform:scale(1)}
-  60%{transform:scale(1.15)}
-  100%{transform:scale(.9);opacity:0}
+  position:absolute;
+  inset:0;
+  display:none;
+  justify-content:center;
+  align-items:center;
 }
 
-/* ===== button ===== */
-.btn{
-  margin-top:26px;
-  padding:14px 40px;
-  border:none;border-radius:40px;
-  background:#ff5c8a;color:#fff;
-  font-size:17px;
-  transition:.15s
-}
-.btn:active{transform:scale(.9);background:#ff3b75}
-
-/* ===== card ===== */
-.card{
-  background:#fff;
-  padding:34px 26px;
-  border-radius:32px;
-  box-shadow:0 30px 60px rgba(255,182,193,.45);
-  text-align:center;
-  width:320px;
-  min-height:420px;
+.page.active{
+  display:flex;
 }
 
-
-/* ===== password ===== */
-.code-inputs{
-  display:flex;gap:10px;
-  justify-content:center;margin:20px 0
-}
-.code-inputs input{
-  width:42px;height:54px;
-  font-size:22px;text-align:center;
+/* ---------- LETTER ---------- */
+#env{
+  width:200px;
+  height:140px;
+  background:#ffb6c1;
   border-radius:12px;
-  border:2px solid #ffd1e1
-}
-.hint{font-size:14px;color:#888;margin-bottom:10px}
-.err{color:#ff4f80;height:18px}
-
-/* ===== menu ===== */
-.menu{
-  display:grid;
-  grid-template-columns:repeat(2,150px);
-  gap:20px;margin-top:20px
-}
-.menu div{
-  height:150px;
-  background:#ff7fa6;
-  border-radius:30px;
-  color:#fff;
-  display:flex;flex-direction:column;
-  justify-content:center;align-items:center;
-  font-size:18px;
-  box-shadow:0 20px 50px rgba(255,105,180,.45);
-  transition:.15s
-}
-.menu div:active{transform:scale(.9);background:#ff5c8a}
-
-/* ===== message ===== */
-.msg{
-  font-size:24px;
-  color:#ff4f80;
-  line-height:1.7;
-  animation:type .6s ease
-}
-@keyframes type{
-  from{opacity:0;transform:translateY(10px)}
-  to{opacity:1;transform:none}
-}
-/* ===== SONG MODE ===== */
-.song-mode{
-  background:radial-gradient(circle at top,#2a0033,#050008);
+  cursor:pointer;
+  transition:.5s;
 }
 
-
-.song-card{
-  background:rgba(10,0,20,.7);
-  box-shadow:0 0 80px rgba(180,80,200,.25);
+#env.open{
+  transform:scale(1.2);
 }
 
-
-.lyrics{
-  color:#fff;
-  font-size:26px;
-  min-height:120px;
-  margin-bottom:24px;
-  transition:.6s;
-}
-
-.lyrics.big{
-  font-size:38px;
-  color:#ff9fcf;
-  transform:scale(1.15);
-  text-shadow:0 0 20px rgba(255,159,207,.6);
-}
-
-
-.lyrics.show{
-  opacity:1;
-  transform:translateY(0);
-}
-
-.lyrics.hide{
-  opacity:0;
-  transform:translateY(-10px);
-}
-
-#subtitle {
-  position: absolute;
-  bottom: 18%;
-  width: 100%;
-  text-align: center;
-  font-size: 28px;
-  font-weight: 500;
-  color: #e6d9ff;
-  text-shadow: 0 0 12px rgba(120, 80, 160, 0.6);
-  opacity: 0;
-  transform: scale(1);
-  transition: all 0.4s ease;
-}
-
-#subtitle.show {
-  opacity: 1;
-  transform: scale(1.25);
-}
-
-#subtitle.fade {
-  opacity: 0;
-  transform: scale(0.9);
-}
-
-
-/* ===== hearts ===== */
-.heart{
-  position:fixed;
-  bottom:-20px;
-  font-size:22px;
-  animation:up 4s linear
-}
-@keyframes up{
-  to{transform:translateY(-120vh);opacity:0}
+/* ---------- BUTTON ---------- */
+button{
+  padding:12px 24px;
+  font-size:16px;
+  border:none;
+  border-radius:20px;
+  cursor:pointer;
 }
 </style>
 </head>
 
 <body>
 
-  
-<!-- sounds -->
-<audio id="click" src="click.mp3" preload="auto"></audio>
-<audio id="open" src="open.mp3" preload="auto"></audio>
-<audio id="ok" src="success.mp3" preload="auto"></audio>
-
-
-<!-- ===== PAGE 1 : envelope ===== -->
+<!-- PAGE 1 : ซอง -->
 <div class="page active" id="p1">
-  <div class="envelope" id="env"></div>
-  <div style="margin-top:16px;color:#ff4f80">
-    💌 จดหมายสำหรับสุดที่รักนาว
-  </div>
-  <button class="btn" onclick="openLetter()">เปิดเลย</button>
+  <div id="env" onclick="openLetter()"></div>
 </div>
 
-<!-- ===== PAGE 2 : password ===== -->
+<!-- PAGE 2 : ใส่รหัส -->
 <div class="page" id="p2">
-  <div class="card">
-    <h3>รหัสลับของเรา</h3>
-
-    <div class="code-inputs">
-      <input maxlength="1">
-      <input maxlength="1">
-      <input maxlength="1">
-      <input maxlength="1">
-      <input maxlength="1">
-      <input maxlength="1">
-    </div>
-
-    <div class="hint">💡 คำใบ้: วันครบรอบ</div>
-    <div class="err" id="err"></div>
-
-    <button class="btn" onclick="check()">ยืนยัน</button>
-  </div>
+  <button onclick="go('menu')">ไปเมนู</button>
 </div>
 
-<!-- ===== PAGE 3 : menu ===== -->
-<div class="page" id="p3">
-  <h2 style="color:#ff4f80">เมนู</h2>
-
-  <div class="menu">
-    <div
-  onpointerdown="openTimeMsg(true)"
->
-
-💌<br>ข้อความ
+<!-- PAGE 3 : เมนู -->
+<div class="page" id="menu">
+  <button onclick="go('textMenu')">ข้อความ</button>
+  <button onclick="go('songMenu')">เพลง</button>
 </div>
 
-
-
-    <div onpointerdown="openSong(true)">
-🎵<br>เพลง
+<!-- PAGE 4 : เมนูข้อความ -->
+<div class="page" id="textMenu">
+  <button onclick="go('menu')">← กลับ</button>
+  <h1>เมนูข้อความ</h1>
 </div>
 
-    <div>🖼<br>รูป</div>
-    <div>🎮<br>เกม</div>
-  </div>
+<!-- PAGE 5 : เมนูเพลง -->
+<div class="page" id="songMenu">
+  <button onclick="go('menu')">← กลับ</button>
+  <h1>เมนูเพลง</h1>
 </div>
 
-<!-- ===== PAGE : TIME MESSAGE ===== -->
- 
-<div class="page" id="p5">
-  
-  
-  <div class="card">
-    
-
-  <img id="randomImg"
-       style="
-         width:100%;
-         height:180px;
-         object-fit:cover;
-         border-radius:20px;
-         margin-bottom:18px;
-       ">
-
-  <div class="msg" id="timeMsg"></div>
-  
-
-
-    <div style="font-size:14px;color:#888;margin-top:14px">
-      * ข้อความนี้จะเปลี่ยนตามเวลาของเครื่องนาว
-    </div>
-
-    <button class="btn" onpointerdown="playClick()" onclick="go('p3')">
-  กลับเมนู
-</button>
-
-<!-- ===== PAGE : SONG ===== -->
-<div class="page" id="pSong">
-  <div class="card song-card">
-    <div class="lyrics" id="lyric"></div>
-
-    <button class="btn" onpointerdown="startSong()">
-      ▶️ เปิดเพลง
-    </button>
-
-    <button class="btn" style="margin-top:14px"
-      onpointerdown="stopSong(); go('p3')">
-      ⬅ กลับเมนู
-    </button>
-  </div>
-</div>
-<div id="subtitle"></div>
-
-<audio id="song" src="song.mp3"></audio>
-
-
-  </div>
-</div>
-
+<!-- ---------- JS (สำคัญมาก) ---------- -->
 <script>
-/* ===== ข้อความตามเวลา (เสาร์ + อาทิตย์) ===== */
-const timeMessages = {
-  // ศุกร์ (getDay() = 5)
-  5: {
-    6: "เช้านี้ขอให้ที่รักตื่นมาสดชื่นนน สดใสนะะ 🤍",
-    7: "คิดถึงงงงนาวตอนนี้นาวอยู่ไหนแล้วนะะ",
-    8: "เช้านี้อย่าลืมยิ้มให้ตัวเองเย้อๆนะะ",
-    9: "ตั้งใจเรียนนะะะ ถ้ามีงานอะไรก็ทําให้เสร็จห้ามดอง ถ้ามีกิจกรรมก็ขอให้นาวเต็มที่นะ",
-    10: "นาวเป็นยังไงบ้างนะะะเราอยากรู้จังเลย เราคิดถึงนะ",
-    11: "ใกล้เที่ยงแล้วหิวมั้ยย มากินเรามะะะ",
-    12: "ตอนเที่ยงแล้ววกินข้าวรึยังเอ่ยย กินเยอะๆเลยนะะ",
-    13: "บ่ายแล้วว น่าจะใกล้เข้าเรียนแระ",
-    14: "สู้ๆๆๆนะะะเราเป็นกําลังใจให้้",
-    15: "คิดถึงนาวววววววอ่ะะะะะะะะ",
-    16: "ใกล้เย็นแล้วว เลิกเรียนรึยังเอ่ยยวันนี้เป็นยังไงบ้างง",
-    17: "นาวกลับบ้านยังนะ แล้ววันนี้ไปกินข้าวเย็นที่ไหน ไปกลับใครร เครียดดด",
-    18: "เย็นแล้วนะ กลับบ้านยังง เราคิดถึงง เราอยากโทรร",
-    19: "ทุ่มนึงแล้วนะ มากอดกันนน",
-    20: "คิดถึงนาวๆๆๆๆๆๆ จุ้ฟฟฟฟ",
-    21: "นาวใกล้เข้านอนแล้วนะ อย่าแอบคุยกับผู้ชายคนอื่นนนนะะะ",
-    22: "หลับรึยังเอ่ยย ขอให้นาวหลับฝันดี เราไปเจอกันในฝันดีกว่าา",
-    23: "หลับปุ๋ยยยยังงงง คืนนี้เราไม่ได้กอด แต่เราจะกอดนาววว"
-  },
+/* ===== DOM ===== */
+const pages = document.querySelectorAll(".page")
+const env = document.getElementById("env")
 
-  // เสาร์ (getDay() = 6)
-  6: {
-    6: "อรุณสวัสดิ์ที่รักกกกก",
-    7: "เมื่อไหร่เราจะได้กลับบ้านนนนน คิดถึงแฟน",
-    8: "ขอให้วันนี้นาวอารมณ์ดีทั้งวันนน จุ้ฟๆ",
-    9: "ถึงตัวเราจะอยู่ไกลแต่หัวใจเราใกล้กันน",
-    10: "คิดถึงงงงง คิดถึงกันมั้ยเอ่ยยมากอดๆกันน",
-    11: "เหงามั้ยยที่รักก รอเค้าหน่อยน้าา ฮึบๆไว้้",
-    12: "อย่าลืมกินข้าวเที่ยงด้วยน้าา ระวังปวดท้องถ้าไม่กินน",
-    13: "รักนาวนะะะะ รักมากๆๆๆ",
-    14: "เพราะจะได้กลับไปกอด",
-    15: "นาววๆๆๆๆๆๆ กอดกันนนแน่นๆๆๆเลยย",
-    16: "เราน่าจะใกล้ได้กลับบ้านแล้วว เราคิดถึงที่รักมากกกก",
-    17: "เราถึงรึยัง53426723542",
-    18: "6โมงแล้วน่าจะถึงละแหละ",
-    19: "ถึงแล้วววว100%"
-  }
-};
-/* ===== รูปสุ่มตามชั่วโมง ===== */
-const images = [
-  "img1.jpg",
-  "img2.jpg",
-  "img3.jpg",
-  "img4.jpg",
-  "img5.jpg",
-  "img6.jpg",
-  "img7.jpg",
-  "img8.jpg",
-  "img9.jpg",
-  "img10.jpg"
-]
-
-function setRandomImage(){
-  const hour = new Date().getHours()
-  const index = hour % images.length
-  const img = document.getElementById("randomImg")
-  if(img) img.src = images[index]
-}
-
-
-
-function openTimeMsg(fromUser){
-  if(fromUser) playClick()   // 🔥 เสียงอยู่ใน gesture
-
-  setRandomImage()
-  go("p5")
-
-  const now = new Date()
-  const day = now.getDay()
-  const hour = now.getHours()
-
-  document.getElementById("timeMsg").innerText =
-    timeMessages[day]?.[hour]
-    || "ไม่ว่าเวลาไหน เราก็คิดถึงนาวนะ 🤍"
-}
-
-
-function playClick(){
-  const s = document.getElementById("click")
-  if(!s) return
-  s.pause()
-  s.currentTime = 0
-  s.play().catch(()=>{})
-}
-
-
-</script>
-
-<script>
-const song = document.getElementById("song")
-const lyricBox = document.getElementById("lyric")
-
-/* 🔥 ซับทีละคำ (เริ่มจากท่อนแรก) */
-const lyrics = [
-  { t: 0.20, w: "คิดถึง" },
-  { t: 0.21, w: "ฉันไหม" },
-  { t: 1.9, w: "เวลา" },
-  { t: 2.6, w: "เวลา" },
-  { t: 3.3, w: "ที่" },
-  { t: 3.8, w: "เธอ" },
-  { t: 4.3, w: "เหงา" }
-]
-const subtitle = document.getElementById("subtitle");
-let currentIndex = -1;
-
-song.ontimeupdate = () => {
-  const t = song.currentTime;
-
-  if (currentIndex + 1 < lyrics.length && t >= lyrics[currentIndex + 1].time) {
-    currentIndex++;
-    subtitle.innerText = lyrics[currentIndex].text;
-    subtitle.classList.remove("fade");
-    subtitle.classList.add("show");
-
-    setTimeout(() => {
-      subtitle.classList.remove("show");
-      subtitle.classList.add("fade");
-    }, 700);
-  }
-};
-
-let lyricIndex = 0
-let timer
-
-function openSong(fromUser){
-  if(fromUser) playClick()
-  go("pSong")
-}
-
-function startSong(){
-  document.body.classList.add("song-mode")
-
-  song.currentTime = 0
-  song.play()
-
-  lyricIndex = 0
-  lyricBox.innerText = ""
-  lyricBox.classList.remove("big")
-
-  clearInterval(timer)
-  timer = setInterval(updateLyric, 100)
-}
-
-function updateLyric(){
-  if(lyricIndex >= lyrics.length) return
-
-  if(song.currentTime >= lyrics[lyricIndex].t){
-    lyricBox.classList.remove("show","big")
-    lyricBox.classList.add("hide")
-
-    setTimeout(()=>{
-      lyricBox.innerText = lyrics[lyricIndex].w
-      lyricBox.classList.remove("hide")
-      lyricBox.classList.add("show","big")
-      lyricIndex++
-    },200)
-  }
-}
-
-
-
-function stopSong(){
-  song.pause()
-  song.currentTime = 0
-  document.body.classList.remove("song-mode")
-  clearInterval(timer)
-}
-</script>
-
-
-
-<script>
-const snd={
-  click:document.getElementById("click"),
-  open:document.getElementById("open"),
-  ok:document.getElementById("ok")
-}
-function playSound(sound){
-  navigator.vibrate?.(15)
-
-  if(!sound) return
-  sound.pause()
-  sound.currentTime = 0
-  sound.play().catch(()=>{})
-}
-
-
+/* ===== NAV ===== */
 function go(id){
-  document.querySelectorAll(".page")
-    .forEach(p=>p.classList.remove("active"))
+  pages.forEach(p=>p.classList.remove("active"))
   document.getElementById(id).classList.add("active")
 }
 
-
+/* ===== LETTER ===== */
 function openLetter(){
-  playSound(snd.open)
-  navigator.vibrate?.(15)
-
   env.classList.add("open")
   setTimeout(()=>go("p2"),600)
 }
-
-
-/* password */
-const inputs=document.querySelectorAll(".code-inputs input")
-inputs.forEach((inp,i)=>{
-  inp.addEventListener("input",()=>{
-    if(inp.value && i<inputs.length-1)
-      inputs[i+1].focus()
-  })
-})
-
-function check(){
-  const code=[...inputs].map(i=>i.value).join("")
-  if(code==="141068"){
-    playSound(snd.ok)
-    go("p3")
-    for(let i=0;i<20;i++){
-      const h=document.createElement("div")
-      h.className="heart"
-      h.innerText="💗"
-      h.style.left=Math.random()*100+"vw"
-      document.body.appendChild(h)
-      setTimeout(()=>h.remove(),4000)
-    }
-  }else{
-    err.innerText="ผิดแล้วนะ ลองคิดถึงวันสำคัญอีกที 😳"
-     playClick()
-
-     navigator.vibrate?.(15)
-
-     navigator.vibrate?.(15)
-
-  }
-}
-
-/* message */
-function openMsg(){
-  playClick()
-
-  go("p4")
-  msg.innerText="เราตั้งใจทำเว็บนี้ให้นาวจริงๆนะ 🤍"
-}
 </script>
-
-
 
 </body>
 </html>
