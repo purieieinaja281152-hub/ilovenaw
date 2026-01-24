@@ -399,7 +399,6 @@ function playClick(){
 
 <script>
 const song = document.getElementById("song")
-const lyricBox = document.getElementById("lyric")
 
 /* 🔥 ซับทีละคำ (เริ่มจากท่อนแรก) */
 const lyrics = [
@@ -471,45 +470,22 @@ song.ontimeupdate = () => {
 }
 
 
-let lyricIndex = 0
-let timer
 
 function openSong(fromUser){
   if(fromUser) playClick()
+
   document.body.classList.add("song-mode")
   go("pSong")
-}
-
-
-function startSong(){
-  document.body.classList.add("song-mode")
 
   song.currentTime = 0
   song.play()
 
-  lyricIndex = 0
-  lyricBox.innerText = ""
-  lyricBox.classList.remove("big")
-
-  clearInterval(timer)
-  timer = setInterval(updateLyric, 100)
+  currentIndex = -1
+  subtitle.innerText = ""
+  subtitle.classList.remove("fade","show")
 }
 
-function updateLyric(){
-  if(lyricIndex >= lyrics.length) return
 
-  if(song.currentTime >= lyrics[lyricIndex].t){
-    lyricBox.classList.remove("show","big")
-    lyricBox.classList.add("hide")
-
-    setTimeout(()=>{
-      lyricBox.innerText = lyrics[lyricIndex].w
-      lyricBox.classList.remove("hide")
-      lyricBox.classList.add("show","big")
-      lyricIndex++
-    },200)
-  }
-}
 
 
 
