@@ -293,15 +293,22 @@ body{
   กลับเมนู
 </button>
 
+<div class="page" id="p5">
+  <div class="card">
+    ...
+    <button class="btn" onpointerdown="playClick()" onclick="go('p3')">
+      กลับเมนู
+    </button>
+  </div>
+</div>
+
+<!-- ✅ หน้าเพลงต้องอยู่นอก -->
 <div class="page" id="pSong">
 
-  <!-- กล่องพื้นหลัง -->
   <div class="card song-card" id="musicBox"></div>
 
-  <!-- ซับ -->
   <div class="lyrics" id="lyric"></div>
 
-  <!-- ปุ่ม -->
   <button class="btn" onpointerdown="startSong()">
     ▶️ เปิดเพลง
   </button>
@@ -313,14 +320,8 @@ body{
 
 </div>
 
-
 <div id="subtitle"></div>
-
 <audio id="song" src="song.mp3"></audio>
-
-
-  </div>
-</div>
 
 <script>
 /* ===== ข้อความตามเวลา (เสาร์ + อาทิตย์) ===== */
@@ -486,7 +487,7 @@ song.ontimeupdate = () => {
 
   if (currentIndex + 1 < lyrics.length && t >= lyrics[currentIndex + 1].time) {
     currentIndex++;
-    subtitle.innerText = lyrics[currentIndex].text;
+     subtitle.innerText = lyrics[currentIndex].w;
     subtitle.classList.remove("fade");
     subtitle.classList.add("show");
 
