@@ -133,9 +133,10 @@ body{
 <body>
 
 <!-- sounds -->
-<audio id="click" src="click.mp3"></audio>
-<audio id="open" src="open.mp3"></audio>
-<audio id="ok" src="success.mp3"></audio>
+<audio id="click" src="click.mp3" preload="auto"></audio>
+<audio id="open" src="open.mp3" preload="auto"></audio>
+<audio id="ok" src="success.mp3" preload="auto"></audio>
+
 
 <!-- ===== PAGE 1 : envelope ===== -->
 <div class="page active" id="p1">
@@ -240,7 +241,11 @@ const timeMessages = {
 
 
 function openTimeMsg(){
-  click(snd.click);
+  playSound(snd.click);
+  navigator.vibrate?.(15)
+
+  navigator.vibrate?.(15)
+
   go("p5");
 
   const now = new Date();
@@ -262,25 +267,37 @@ const snd={
   open:document.getElementById("open"),
   ok:document.getElementById("ok")
 }
-const click=s=>{s.currentTime=0;s.play()}
+function playSound(sound){
+  navigator.vibrate?.(15)
+
+  if(!sound) return
+  sound.pause()
+  sound.currentTime = 0
+  sound.play().catch(()=>{})
+}
+
 
 function go(id){
-  click(snd.click)
   document.querySelectorAll(".page")
     .forEach(p=>p.classList.remove("active"))
   document.getElementById(id).classList.add("active")
 }
 
+
 function openLetter(){
-  click(snd.open)
+  playSound(snd.open)
+  navigator.vibrate?.(15)
+
   env.classList.add("open")
   setTimeout(()=>go("p2"),600)
+}
+
   function openTimeMsg(){
   click(snd.click)
   go("p5")
 }
 
-}
+
 
 /* password */
 const inputs=document.querySelectorAll(".code-inputs input")
@@ -296,6 +313,7 @@ function check(){
   if(code==="141068"){
     click(snd.ok)
     go("p3")
+    celebrate()
     for(let i=0;i<20;i++){
       const h=document.createElement("div")
       h.className="heart"
@@ -306,7 +324,11 @@ function check(){
     }
   }else{
     err.innerText="ผิดแล้วนะ ลองคิดถึงวันสำคัญอีกที 😳"
-    click(snd.click)
+     playSound(snd.click)
+     navigator.vibrate?.(15)
+
+     navigator.vibrate?.(15)
+
   }
 }
 
