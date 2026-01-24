@@ -243,55 +243,6 @@ body{
   }
 }
 
-.song-mode::before {
-  content:"";
-  position:fixed;
-  inset:0;
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(10,0,20,0.2),
-      rgba(0,0,0,0.85)
-    );
-  pointer-events:none;
-  z-index:0;
-}
-
-@keyframes bgPulse {
-  0% { filter: brightness(0.85) saturate(0.9); }
-  50% { filter: brightness(0.65) saturate(1.2); }
-  100% { filter: brightness(0.85) saturate(0.9); }
-}
-
-.song-mode {
-  animation: bgPulse 8s ease-in-out infinite;
-}
-
-@keyframes heartPulse {
-  0% { transform: translate(-50%, -50%) scale(1); }
-  50% { transform: translate(-50%, -50%) scale(1.04); }
-  100% { transform: translate(-50%, -50%) scale(1); }
-}
-
-.snow {
-  position: fixed;
-  top: -20px;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.85);
-  filter: blur(0.3px);
-  animation: snowFall linear infinite;
-  pointer-events: none;
-}
-
-@keyframes snowFall {
-  to {
-    transform: translateY(110vh);
-    opacity: 0;
-  }
-}
-
 
 /* ===== hearts ===== */
 .heart{
