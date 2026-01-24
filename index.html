@@ -147,7 +147,8 @@ body{
   <div style="margin-top:16px;color:#ff4f80">
     💌 จดหมายสำหรับสุดที่รักนาว
   </div>
-  <button class="btn" onclick="openLetter()">เปิดเลย</button>
+  <button class="btn" onpointerdown="openLetter()">เปิดเลย</button>
+
 </div>
 
 <!-- ===== PAGE 2 : password ===== -->
@@ -177,9 +178,9 @@ body{
 
   <div class="menu">
     <div
-  onpointerdown="playClick()"
-  onclick="openTimeMsg()"
+  onpointerdown="openTimeMsg(true)"
 >
+
 💌<br>ข้อความ
 </div>
 
@@ -216,8 +217,9 @@ body{
       * ข้อความนี้จะเปลี่ยนตามเวลาของเครื่องนาว
     </div>
 
-    <button class="btn" onpointerdown="playClick()" onclick="go('p3')">
-  กลับเมนู
+    <button class="btn"
+  onpointerdown="goBackFromMsg()">กลับเมณู
+
 </button>
 
 
@@ -225,7 +227,11 @@ body{
   </div>
 </div>
 
-<script>
+<script> function goBackFromMsg(){
+  playClick()
+  go("p3")
+}
+
 /* ===== ข้อความตามเวลา (เสาร์ + อาทิตย์) ===== */
 const timeMessages = {
   // ศุกร์ (getDay() = 5)
@@ -285,12 +291,10 @@ function setRandomImage(){
 
 
 
-function openTimeMsg(){
+function openTimeMsg(fromUser){
+  if(fromUser) playClick()   // 🔥 เสียงอยู่ใน gesture
 
-  
-
-  setRandomImage()     // ⭐ รูปสุ่มตามชั่วโมง
-
+  setRandomImage()
   go("p5")
 
   const now = new Date()
@@ -300,7 +304,6 @@ function openTimeMsg(){
   document.getElementById("timeMsg").innerText =
     timeMessages[day]?.[hour]
     || "ไม่ว่าเวลาไหน เราก็คิดถึงนาวนะ 🤍"
-     
 }
 
 
