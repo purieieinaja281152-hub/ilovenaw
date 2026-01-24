@@ -303,8 +303,7 @@ body{
 </div>
 <div id="subtitle"></div>
 
-
-
+<audio id="song" src="song.mp3"></audio>
 
 
   </div>
@@ -404,7 +403,37 @@ function playClick(){
 </script>
 
 <script>
+const song = document.getElementById("song")
+const lyricBox = document.getElementById("lyric")
 
+/* 🔥 ซับทีละคำ (เริ่มจากท่อนแรก) */
+const lyrics = [
+  { t: 0.20, w: "คิดถึง" },
+  { t: 0.21, w: "ฉันไหม" },
+  { t: 1.9, w: "เวลา" },
+  { t: 2.6, w: "เวลา" },
+  { t: 3.3, w: "ที่" },
+  { t: 3.8, w: "เธอ" },
+  { t: 4.3, w: "เหงา" }
+]
+const subtitle = document.getElementById("subtitle");
+let currentIndex = -1;
+
+song.ontimeupdate = () => {
+  const t = song.currentTime;
+
+  if (currentIndex + 1 < lyrics.length && t >= lyrics[currentIndex + 1].time) {
+    currentIndex++;
+    subtitle.innerText = lyrics[currentIndex].text;
+    subtitle.classList.remove("fade");
+    subtitle.classList.add("show");
+
+    setTimeout(() => {
+      subtitle.classList.remove("show");
+      subtitle.classList.add("fade");
+    }, 700);
+  }
+};
 
 let lyricIndex = 0
 let timer
@@ -418,21 +447,15 @@ function startSong(){
   document.body.classList.add("song-mode")
 
   song.currentTime = 0
-  song.volume = 1
-
-  song.play().then(()=>{
-    console.log("🎵 song playing")
-  }).catch(err=>{
-    console.log("❌ play error", err)
-  })
+  song.play()
 
   lyricIndex = 0
   lyricBox.innerText = ""
+  lyricBox.classList.remove("big")
 
   clearInterval(timer)
   timer = setInterval(updateLyric, 100)
 }
-
 
 function updateLyric(){
   if(lyricIndex >= lyrics.length) return
@@ -458,28 +481,11 @@ function stopSong(){
   document.body.classList.remove("song-mode")
   clearInterval(timer)
 }
-  const song = document.getElementById("song")
-const lyricBox = document.getElementById("lyric")
-const lyrics = [
-  { t: 19.0, w: "คิดถึง" },
-  { t: 20.5, w: "ฉันไหม" },
-  { t: 22.8, w: "เวลาที่เธอ" },
-  { t: 25.8, w: "เหงา" },
-
-  { t: 31.5, w: "รู้หรือเปล่า" },
-  { t: 34.8, w: "ว่าทุกคืน" },
-  { t: 38.0, w: "ฉันยังรอ" }
-]
 </script>
 
 
 
 <script>
-  const env = document.getElementById("env")
-song.ontimeupdate = () => {
-  console.log(song.currentTime.toFixed(2))
-}
-
 const snd={
   click:document.getElementById("click"),
   open:document.getElementById("open"),
@@ -552,8 +558,6 @@ function openMsg(){
   msg.innerText="เราตั้งใจทำเว็บนี้ให้นาวจริงๆนะ 🤍"
 }
 </script>
-
-<audio id="song" src="song.mp3" preload="auto"></audio>
 
 
 
