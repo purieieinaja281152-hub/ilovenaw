@@ -293,24 +293,26 @@ body{
   กลับเมนู
 </button>
 
-<!-- ===== PAGE : SONG ===== -->
-</div> <!-- card ของ p5 -->
-</div> <!-- page p5 -->
 <div class="page" id="pSong">
-  <div class="card song-card" id="musicBox">
 
-    <div class="lyrics" id="lyric"></div>
+  <!-- กล่องพื้นหลัง -->
+  <div class="card song-card" id="musicBox"></div>
 
-    <button class="btn" onpointerdown="startSong()">
-      ▶️ เปิดเพลง
-    </button>
+  <!-- ซับ -->
+  <div class="lyrics" id="lyric"></div>
 
-    <button class="btn" style="margin-top:14px"
-      onpointerdown="stopSong(); go('p3')">
-      ⬅ กลับเมนู
-    </button>
-  </div>
+  <!-- ปุ่ม -->
+  <button class="btn" onpointerdown="startSong()">
+    ▶️ เปิดเพลง
+  </button>
+
+  <button class="btn" style="margin-top:14px"
+    onpointerdown="stopSong(); go('p3')">
+    ⬅ กลับเมนู
+  </button>
+
 </div>
+
 
 <div id="subtitle"></div>
 
