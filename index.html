@@ -241,18 +241,19 @@ const timeMessages = {
 
 
 function openTimeMsg(){
-  playSound(snd.click);
-  navigator.vibrate?.(15)
+  playSound(snd.click)
 
-  go("p5");
+  setTimeout(()=>{
+    go("p5")
 
-  const now = new Date();
-  const day = now.getDay();
-  const hour = now.getHours();
+    const now = new Date()
+    const day = now.getDay()
+    const hour = now.getHours()
 
-  document.getElementById("timeMsg").innerText =
-    timeMessages[day]?.[hour]
-    || "ไม่ว่าเวลาไหน เราก็คิดถึงนาวนะ 🤍";
+    document.getElementById("timeMsg").innerText =
+      timeMessages[day]?.[hour]
+      || "ไม่ว่าเวลาไหน เราก็คิดถึงนาวนะ 🤍"
+  }, 50)
 }
 
 </script>
