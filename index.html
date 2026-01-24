@@ -134,28 +134,11 @@ body{
 </head>
 
 <body>
-<body onpointerdown="unlockSound()">
 
 <!-- sounds -->
 <audio id="click" src="click.mp3" preload="auto"></audio>
 <audio id="open" src="open.mp3" preload="auto"></audio>
-<audio id="ok" src="success.mp3" preload="auto"></audio> <script>
-let soundUnlocked = false
-
-function unlockSound(){
-  if(soundUnlocked) return
-  soundUnlocked = true
-
-  const s = document.getElementById("click")
-  s.volume = 0
-  s.play().then(()=>{
-    s.pause()
-    s.currentTime = 0
-    s.volume = 1
-  }).catch(()=>{})
-}
-</script>
-
+<audio id="ok" src="success.mp3" preload="auto"></audio> 
 
 
 <!-- ===== PAGE 1 : envelope ===== -->
