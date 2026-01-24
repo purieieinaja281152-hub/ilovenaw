@@ -293,14 +293,6 @@ body{
   กลับเมนู
 </button>
 
-<div class="page" id="p5">
-  <div class="card">
-    ...
-    <button class="btn" onpointerdown="playClick()" onclick="go('p3')">
-      กลับเมนู
-    </button>
-  </div>
-</div>
 
 <!-- ✅ หน้าเพลงต้องอยู่นอก -->
 <div class="page" id="pSong">
@@ -515,9 +507,6 @@ function startSong(){
   song.currentTime = 0
   song.play()
 
-
-  clearInterval(timer)
-  timer = setInterval(updateLyric, 100)
 }
 
 
