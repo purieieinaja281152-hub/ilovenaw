@@ -178,10 +178,7 @@ body{
 }
 
 
-#subtitle.show {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1.15);
-}
+
 
 
 #subtitle.fade {
@@ -214,6 +211,36 @@ body{
     rgba(0,0,0,0.55) 100%
   );
   pointer-events:none;
+}
+
+@keyframes subtleShake {
+  0% { transform: translate(-50%, -50%) }
+  25% { transform: translate(-49.5%, -50%) }
+  50% { transform: translate(-50.5%, -50%) }
+  75% { transform: translate(-49.8%, -50%) }
+  100% { transform: translate(-50%, -50%) }
+}
+
+#subtitle.show {
+  animation:
+    sadFloat 0.8s ease forwards,
+    subtleShake 4s ease-in-out infinite;
+}
+
+.sad-particle {
+  position: fixed;
+  top: -10px;
+  width: 2px;
+  height: 40px;
+  background: rgba(255,255,255,0.08);
+  animation: fall 8s linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(120vh);
+    opacity: 0;
+  }
 }
 
 
@@ -437,7 +464,7 @@ const song = document.getElementById("song")
 
 /* 🔥 ซับทีละคำ (เริ่มจากท่อนแรก) */
 const lyrics = [
-  { t: 20.0, w: "คิดถึงฉันไหม เวลาไม่เจอะเจอกันกับฉัน" },
+  { t: 20.0, w: "คิดถึงฉันไหม เวลาทที่เธอ ไม่เจอะเจอกันกับฉัน" },
   { t: 26.0, w: "คิดถึงฉันไหม เวลาที่เธอเหงาใจ" },
   { t: 33.0, w: "คิดถึงฉันไหม เวลาที่เธอไม่มีใครให้ทะเลาะ" },
   { t: 40.0, w: "ไปไหนแล้ว ไม่มีไหล่ให้เกาะ แล้วเธอคิดถึงใคร" },
@@ -484,25 +511,21 @@ const lyrics = [
 const subtitle = document.getElementById("subtitle");
 let currentIndex = -1;
 
-song.ontimeupdate = () => {
-  const t = song.currentTime
+if (index !== currentIndex) {
+  currentIndex = index
 
-  let index = -1
-  for (let i = 0; i < lyrics.length; i++) {
-    if (t >= lyrics[i].t) index = i
-    else break
-  }
+  if (currentIndex >= 0) {
+    subtitle.classList.remove("show")
+    subtitle.classList.add("fade")
 
-  if (index !== currentIndex) {
-    currentIndex = index
-
-    if (currentIndex >= 0) {
+    setTimeout(() => {
       subtitle.innerText = lyrics[currentIndex].w
       subtitle.classList.remove("fade")
       subtitle.classList.add("show")
-    }
+    }, 300)
   }
 }
+
 
 
 
@@ -518,6 +541,16 @@ function openSong(fromUser){
   currentIndex = -1
   subtitle.innerText = ""
   subtitle.classList.remove("fade","show")
+for(let i=0;i<20;i++){
+  const p=document.createElement("div")
+  p.className="sad-particle"
+  p.style.left=Math.random()*100+"vw"
+  p.style.animationDelay=Math.random()*8+"s"
+  document.body.appendChild(p)
+
+  setTimeout(()=>p.remove(),8000)
+}
+
 }
 
 
