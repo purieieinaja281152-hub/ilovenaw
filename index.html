@@ -180,13 +180,6 @@ body{
   opacity: 0;
   transform: scale(0.9);
 }
-.hide {
-  opacity: 0;
-  transform: scale(0.95);
-  pointer-events: none;
-  transition: 0.6s ease;
-}
-
 
 
 /* ===== hearts ===== */
@@ -293,27 +286,31 @@ body{
   กลับเมนู
 </button>
 
-
-<!-- ✅ หน้าเพลงต้องอยู่นอก -->
+<!-- ===== PAGE : SONG ===== -->
+</div> <!-- card ของ p5 -->
+</div> <!-- page p5 -->
 <div class="page" id="pSong">
+  <div class="card song-card">
+    <div class="lyrics" id="lyric"></div>
 
-  <div class="card song-card" id="musicBox"></div>
+    <button class="btn" onpointerdown="startSong()">
+      ▶️ เปิดเพลง
+    </button>
 
-  <div class="lyrics" id="lyric"></div>
-
-  <button class="btn" onpointerdown="startSong()">
-    ▶️ เปิดเพลง
-  </button>
-
-  <button class="btn" style="margin-top:14px"
-    onpointerdown="stopSong(); go('p3')">
-    ⬅ กลับเมนู
-  </button>
-
+    <button class="btn" style="margin-top:14px"
+      onpointerdown="stopSong(); go('p3')">
+      ⬅ กลับเมนู
+    </button>
+  </div>
 </div>
 
 <div id="subtitle"></div>
+
 <audio id="song" src="song.mp3"></audio>
+
+
+  </div>
+</div>
 
 <script>
 /* ===== ข้อความตามเวลา (เสาร์ + อาทิตย์) ===== */
@@ -410,7 +407,7 @@ function playClick(){
 
 <script>
 const song = document.getElementById("song")
-
+const lyricBox = document.getElementById("lyric")
 
 /* 🔥 ซับทีละคำ (เริ่มจากท่อนแรก) */
 const lyrics = [
@@ -445,42 +442,28 @@ const lyrics = [
   { t: 185.0, w: "คอยเธอกลับมา" },
 
 
-  { t: 205.0, w: "เมื่อเราต้องห่าง" },
-  { t: 207.0, w: "ยิ่งนาน ๆ" },
-  { t: 208.0, w: "อาจลืมกัน" },
-  { t: 210.0, w: "เลยไม่แน่ใจ" },
-  { t: 214.0, w: "ตอบหน่อยได้ไหม" },
-  { t: 215.0, w: "ตอบฉัน" },
-  { t: 216.0, w: "หน่อย" },
-  { t: 217.0, w: "ว่าเธอ" },
-  { t: 218.0, w: "คิดถึงกัน" },
-  { t: 219.0, w: "ไม่ต้อง" },
-  { t: 220.0, w: "หวาน" },
-  { t: 221.0, w: "ต้องแหววหรอก" },
-  { t: 223.0, w: "อยากถามแค่ให้เธอ" },
-  { t: 226.0, w: "ตอบหน่อยได้ไหม" },
-  { t: 228.0, w: "ตอบฉันก่อน" },
-  { t: 230.0, w: "ว่าเธอคิดถึงฉัน" },
-  { t: 233.0, w: "อย่างที่ฉัน" },
-  { t: 234.0, w: "(อย่างที่ฉัน)" },
-  { t: 235.0, w: "มันคิดถึง" },
-  { t: 238.0, w: "คอยเธอ" },
-  { t: 240.0, w: "กลับมา" },
+  
+  { t: 205.0, w: "เมื่อเราต้องห่าง ยิ่งนาน ๆ อาจลืมกัน" },
+  { t: 210.0, w: "เลยไม่แน่ใจ ตอบหน่อยได้ไหม" },
+  { t: 214.0, w: "ตอบฉันหน่อย ว่าเธอคิดถึงกัน" },
+  { t: 219.0, w: "ไม่ต้องหวาน ไม่ต้องแหววหรอก" },
+  { t: 223.0, w: "อยากถามแค่ให้เธอ ตอบหน่อยได้ไหม" },
+  { t: 228.0, w: "ตอบฉันก่อน ว่าเธอคิดถึงฉัน" },
+  { t: 233.0, w: "อย่างที่ฉัน (อย่างที่ฉัน) มันคิดถึง" },
+  { t: 238.0, w: "คอยเธอกลับมา" },
   { t: 245.0, w: "คอยเธอกลับมา" },
-  { t: 249.0, w: "เย้เอ" },
-  { t: 250.0, w: "ก็มันคิดถึง" },
-  { t: 254.0, w: "นาววววววว" }
+  { t: 249.0, w: "ก็มันคิดถึง นาววววววว" }
 ]
+
 const subtitle = document.getElementById("subtitle");
 let currentIndex = -1;
 
 song.ontimeupdate = () => {
   const t = song.currentTime;
 
-  if (currentIndex + 1 < lyrics.length && t >= lyrics[currentIndex + 1].t) {
-
+  if (currentIndex + 1 < lyrics.length && t >= lyrics[currentIndex + 1].time) {
     currentIndex++;
-     subtitle.innerText = lyrics[currentIndex].w;
+    subtitle.innerText = lyrics[currentIndex].text;
     subtitle.classList.remove("fade");
     subtitle.classList.add("show");
 
@@ -491,7 +474,8 @@ song.ontimeupdate = () => {
   }
 };
 
-
+let lyricIndex = 0
+let timer
 
 function openSong(fromUser){
   if(fromUser) playClick()
@@ -501,14 +485,32 @@ function openSong(fromUser){
 function startSong(){
   document.body.classList.add("song-mode")
 
-  // 🔥 ซ่อนกล่องเพลง
-  document.getElementById("musicBox").classList.add("hide")
-
   song.currentTime = 0
   song.play()
 
+  lyricIndex = 0
+  lyricBox.innerText = ""
+  lyricBox.classList.remove("big")
+
+  clearInterval(timer)
+  timer = setInterval(updateLyric, 100)
 }
 
+function updateLyric(){
+  if(lyricIndex >= lyrics.length) return
+
+  if(song.currentTime >= lyrics[lyricIndex].t){
+    lyricBox.classList.remove("show","big")
+    lyricBox.classList.add("hide")
+
+    setTimeout(()=>{
+      lyricBox.innerText = lyrics[lyricIndex].w
+      lyricBox.classList.remove("hide")
+      lyricBox.classList.add("show","big")
+      lyricIndex++
+    },200)
+  }
+}
 
 
 
