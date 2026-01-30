@@ -276,38 +276,92 @@ body{
   filter:brightness(.95);
 }
 
-/* ===== MEMORY GRID ===== */
+/* ===== MEMORY PAGE ===== */
 .memory-card{
-  min-height:520px;
+  min-height:560px;
+  padding-bottom:10px;
 }
 
-.memory-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:14px;
-  margin:18px 0;
+/* กล่องรวมการ์ด */
+.memory-list{
+  display:flex;
+  flex-direction:column;
+  gap:22px;
+  margin:24px 0;
 }
 
-.memory-item{
-  background:#fff5f9;
-  border-radius:18px;
-  padding:10px;
-  box-shadow:0 10px 25px rgba(255,120,160,.25);
-  text-align:center;
+/* ===== MEMORY ROW (การ์ดยาว) ===== */
+.memory-row{
+  display:flex;
+  align-items:center;
+  gap:18px;
+
+  background:linear-gradient(135deg,#fff0f6,#ffffff);
+  border-radius:26px;
+  padding:18px;
+
+  box-shadow:
+    0 20px 45px rgba(255,120,160,.28),
+    inset 0 0 0 1px rgba(255,255,255,.6);
+
+  transition:.25s ease;
 }
 
-.memory-item video{
-  width:100%;
-  height:120px;
+/* เพิ่มชีวิตนิดหน่อย */
+.memory-row:hover{
+  transform:translateY(-2px);
+  box-shadow:
+    0 26px 60px rgba(255,120,160,.35);
+}
+
+/* ===== VIDEO ===== */
+.memory-row video{
+  width:160px;
+  height:160px;
   object-fit:cover;
-  border-radius:14px;
+  border-radius:22px;
+  flex-shrink:0;
+
+  box-shadow:0 10px 25px rgba(0,0,0,.15);
 }
 
-.memory-item p{
-  font-size:13px;
-  color:#555;
-  margin-top:6px;
+/* ===== TEXT ===== */
+.memory-text{
+  flex:1;
 }
+
+.memory-text h3{
+  margin:0 0 8px;
+  font-size:19px;
+  font-weight:600;
+  color:#ff4d88;
+}
+
+.memory-text p{
+  margin:0;
+  font-size:14.5px;
+  line-height:1.6;
+  color:#555;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:520px){
+  .memory-row{
+    flex-direction:column;
+    text-align:center;
+    padding:20px;
+  }
+
+  .memory-row video{
+    width:100%;
+    height:180px;
+  }
+
+  .memory-text h3{
+    font-size:18px;
+  }
+}
+
 
 
 /* ===== hearts ===== */
@@ -440,22 +494,47 @@ body{
   <div class="card memory-card">
     <h2 class="memory-title">ความทรงจำของเรา</h2>
 
-    <div class="memory-grid">
-      <div class="memory-item">
-        <video src="mem1.mp4" autoplay loop muted playsinline></video>
-        <p>ช่วงเวลาที่เราเดินด้วยกัน</p>
-      </div>
+    <div class="memory-row">
+  <video src="mem1.mp4" autoplay loop muted playsinline></video>
 
-      <div class="memory-item">
-        <video src="mem2.mp4" autoplay loop muted playsinline></video>
-        <p>แค่หัวเราะข้างกันก็พอแล้ว</p>
-      </div>
+  <div class="memory-text">
+    <h3>วันที่เราเดินด้วยกัน</h3>
+    <p>
+      เป็นวันที่ไม่ได้วางแผนอะไร  
+      แต่ทุกก้าวมันรู้สึกพอดีแบบแปลก ๆ  
+      แค่มีเธออยู่ข้าง ๆ โลกก็เงียบลง
+    </p>
+  </div>
+</div>
 
-      <div class="memory-item">
-        <video src="mem3.mp4" autoplay loop muted playsinline></video>
-        <p>วันที่อากาศดีแบบไม่ต้องมีอะไร</p>
-      </div>
-    </div>
+
+      <div class="memory-row">
+  <video src="mem2.mp4" autoplay loop muted playsinline></video>
+
+  <div class="memory-text">
+    <h3>วันที่เราเดินด้วยกัน</h3>
+    <p>
+      เป็นวันที่ไม่ได้วางแผนอะไร  
+      แต่ทุกก้าวมันรู้สึกพอดีแบบแปลก ๆ  
+      แค่มีเธออยู่ข้าง ๆ โลกก็เงียบลง
+    </p>
+  </div>
+</div>
+
+
+      <div class="memory-row">
+  <video src="mem3.mp4" autoplay loop muted playsinline></video>
+
+  <div class="memory-text">
+    <h3>วันที่เราเดินด้วยกัน</h3>
+    <p>
+      เป็นวันที่ไม่ได้วางแผนอะไร  
+      แต่ทุกก้าวมันรู้สึกพอดีแบบแปลก ๆ  
+      แค่มีเธออยู่ข้าง ๆ โลกก็เงียบลง
+    </p>
+  </div>
+</div>
+
 
     <button class="btn" onclick="go('pMemory2')">หน้าถัดไป ➡</button>
     <button class="btn" onclick="go('p3')">กลับเมนู</button>
@@ -465,24 +544,49 @@ body{
       <!-- ===== PAGE : MEMORY 2 ===== -->
 <div class="page" id="pMemory2">
   <div class="card memory-card">
-    <h2 class="memory-title">ความทรงจำ (ต่อ)</h2>
+    <h2 class="memory-title">ความทรงจำ หน้า2</h2>
 
-    <div class="memory-grid">
-      <div class="memory-item">
-        <video src="mem4.mp4" autoplay loop muted playsinline></video>
-        <p>ช่วงเวลาที่เรานั่งเงียบ ๆ ด้วยกัน</p>
-      </div>
+    <div class="memory-row">
+  <video src="mem4.mp4" autoplay loop muted playsinline></video>
 
-      <div class="memory-item">
-        <video src="mem5.mp4" autoplay loop muted playsinline></video>
-        <p>มุมเล็ก ๆ ที่เราชอบมาก</p>
-      </div>
+  <div class="memory-text">
+    <h3>วันที่เราเดินด้วยกัน</h3>
+    <p>
+      เป็นวันที่ไม่ได้วางแผนอะไร  
+      แต่ทุกก้าวมันรู้สึกพอดีแบบแปลก ๆ  
+      แค่มีเธออยู่ข้าง ๆ โลกก็เงียบลง
+    </p>
+  </div>
+</div>
 
-      <div class="memory-item">
-        <video src="mem6.mp4" autoplay loop muted playsinline></video>
-        <p>วันที่เรียบง่ายแต่โคตรพิเศษ</p>
-      </div>
-    </div>
+
+      <div class="memory-row">
+  <video src="mem5.jpg" autoplay loop muted playsinline></video>
+
+  <div class="memory-text">
+    <h3>วันที่เราเดินด้วยกัน</h3>
+    <p>
+      เป็นวันที่ไม่ได้วางแผนอะไร  
+      แต่ทุกก้าวมันรู้สึกพอดีแบบแปลก ๆ  
+      แค่มีเธออยู่ข้าง ๆ โลกก็เงียบลง
+    </p>
+  </div>
+</div>
+
+
+      <div class="memory-row">
+  <video src="mem6.mp4" autoplay loop muted playsinline></video>
+
+  <div class="memory-text">
+    <h3>วันที่เราเดินด้วยกัน</h3>
+    <p>
+      เป็นวันที่ไม่ได้วางแผนอะไร  
+      แต่ทุกก้าวมันรู้สึกพอดีแบบแปลก ๆ  
+      แค่มีเธออยู่ข้าง ๆ โลกก็เงียบลง
+    </p>
+  </div>
+</div>
+
 
     <button class="btn" onclick="go('pMemory1')">⬅ กลับหน้าแรก</button>
     <button class="btn" onclick="go('p3')">กลับเมนู</button>
