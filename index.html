@@ -254,26 +254,6 @@ body{
   margin-bottom:18px;
 }
 
-.memory-list{
-  display:flex;
-  flex-direction:column;
-  gap:18px;
-}
-
-.memory-item{
-  background:#fff5f9;
-  border-radius:20px;
-  padding:14px;
-  box-shadow:0 10px 30px rgba(255,120,160,.25);
-}
-
-.memory-item img{
-  width:100%;
-  height:150px;
-  object-fit:cover;
-  border-radius:16px;
-  margin-top:10px;
-}
 
 .memory-text h3{
   margin:0 0 6px;
@@ -400,7 +380,7 @@ body{
 🎵<br>เพลง
 </div>
 
-    <div onpointerdown="playClick(); go('pMemory')">
+    <div onpointerdown="playClick(); go('pMemory1')">
 🖼<br>รูป
 </div>
     <div>🎮<br>เกม</div>
@@ -461,7 +441,6 @@ body{
     <h2 class="memory-title">ความทรงจำของเรา</h2>
 
     <div class="memory-grid">
-
       <div class="memory-item">
         <video src="mem1.mp4" autoplay loop muted playsinline></video>
         <p>ช่วงเวลาที่เราเดินด้วยกัน</p>
@@ -476,13 +455,19 @@ body{
         <video src="mem3.mp4" autoplay loop muted playsinline></video>
         <p>วันที่อากาศดีแบบไม่ต้องมีอะไร</p>
       </div>
+    </div>
+
+    <button class="btn" onclick="go('pMemory2')">หน้าถัดไป ➡</button>
+    <button class="btn" onclick="go('p3')">กลับเมนู</button>
+  </div>
+</div>
+
       <!-- ===== PAGE : MEMORY 2 ===== -->
 <div class="page" id="pMemory2">
   <div class="card memory-card">
     <h2 class="memory-title">ความทรงจำ (ต่อ)</h2>
 
     <div class="memory-grid">
-
       <div class="memory-item">
         <video src="mem4.mp4" autoplay loop muted playsinline></video>
         <p>ช่วงเวลาที่เรานั่งเงียบ ๆ ด้วยกัน</p>
@@ -497,22 +482,9 @@ body{
         <video src="mem6.mp4" autoplay loop muted playsinline></video>
         <p>วันที่เรียบง่ายแต่โคตรพิเศษ</p>
       </div>
-
     </div>
 
     <button class="btn" onclick="go('pMemory1')">⬅ กลับหน้าแรก</button>
-    <button class="btn" onclick="go('p3')">กลับเมนู</button>
-  </div>
-</div>
-
-
-    </div>
-
-    <button class="btn" onclick="go('pMemory2')">หน้าถัดไป ➡</button>
-
-
-    </div>
-
     <button class="btn" onclick="go('p3')">กลับเมนู</button>
   </div>
 </div>
