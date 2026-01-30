@@ -19,6 +19,8 @@ body{
   position:absolute;inset:0;
   display:flex;flex-direction:column;
   justify-content:center;align-items:center;
+  opacity:0;pointer-events:none;
+  transition:.6s ease
 }
 .page.active{opacity:1;pointer-events:auto}
 
@@ -86,7 +88,6 @@ body{
 }
 .hint{font-size:14px;color:#888;margin-bottom:10px}
 .err{color:#ff4f80;height:18px}
-
 
 /* ===== menu ===== */
 .menu{
@@ -474,10 +475,8 @@ body{
     <div class="err" id="err"></div>
 
     <button class="btn" onclick="check()">ยืนยัน</button>
-    
   </div>
 </div>
-
 
 <!-- ===== PAGE 3 : menu ===== -->
 <div class="page" id="p3">
@@ -500,10 +499,9 @@ body{
     <div onpointerdown="playClick(); go('pMemory1')">
 🖼<br>รูป
 </div>
-<div onpointerdown="playClick(); go('pGame'); initGame();">
+   <div onpointerdown="playClick(); go('pGame')">
 🎮<br>เกม
 </div>
-
 
 </div>
 
@@ -953,11 +951,9 @@ function check(){
      navigator.vibrate?.(15)
 
      navigator.vibrate?.(15)
-     
 
   }
 }
-
 
 /* message */
 function openMsg(){
