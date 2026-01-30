@@ -364,42 +364,61 @@ body{
 
 /* ===== GAME ===== */
 .game-card{
-  text-align:center;
+  width:360px;
+  padding:26px;
 }
 
 .frame{
-  display:inline-block;
   border:4px solid #ff69b4;
-  border-radius:18px;
-  padding:18px;
+  border-radius:26px;
+  padding:20px;
   background:#fff;
 }
 
-#gif{
-  max-width:260px;
-  max-height:260px;
-  margin:10px 0;
+.frame h1{
+  margin:0 0 16px;
+  color:#ff4f80;
 }
 
-.btn.yes{
+.frame img{
+  width:100%;
+  max-width:260px;
+  border-radius:20px;
+  margin:10px 0;
+  transition:.3s;
+}
+
+.frame .btn{
+  font-size:18px;
+  padding:12px 26px;
+  margin:10px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.frame .yes{
   background:#ff69b4;
   color:#fff;
 }
 
-.btn.no{
+.frame .no{
   background:#ddd;
 }
 
-.btn.love{
+.frame .love{
   background:red;
   color:white;
-  font-size:28px;
-  padding:18px 36px;
+  font-size:30px !important;
+  padding:18px 40px;
 }
 
 .message-box{
-  border:3px dashed #ff69b4;
+  margin-top:12px;
   padding:14px;
+  border:3px dashed #ff69b4;
+  border-radius:16px;
   background:#fff0f6;
   font-size:20px;
 }
@@ -480,9 +499,10 @@ body{
     <div onpointerdown="playClick(); go('pMemory1')">
 🖼<br>รูป
 </div>
-   <div onpointerdown="playClick(); go('pGame')">
+<div onpointerdown="playClick(); go('pGame'); initGame();">
 🎮<br>เกม
 </div>
+
 
 </div>
 
@@ -945,6 +965,81 @@ function openMsg(){
 }
 </script>
 
+<script>
+/* ===== GAME SCRIPT (SAFE VERSION) ===== */
+function initGame(){
+
+  const gif = document.getElementById("gif")
+  const question = document.getElementById("question")
+  const btnContainer = document.getElementById("btnContainer")
+
+  if(!gif || !question || !btnContainer) return
+
+  let yesBtnSize = 18
+  let noCount = 0
+
+  const gifs = [
+    "https://media.tenor.com/76BaX0eo304AAAAj/kitty-kitty-heart.gif",
+    "https://media1.tenor.com/m/wVAjxnPa81IAAAAd/cat-cat-gif.gif",
+    "https://media1.tenor.com/m/f6ts3WWJa-8AAAAC/funny-cats-funny.gif",
+    "https://media1.tenor.com/m/kEZzd8WrRpAAAAAC/peach-peach-and-goma.gif",
+    "https://media.tenor.com/C35t4Pf5GlgAAAAi/peach-and-goma-cute.gif",
+    "https://media1.tenor.com/m/troWhJKIjZsAAAAC/hey-cat.gif"
+  ]
+
+  function drawButtons(){
+    btnContainer.innerHTML = `
+      <button class="btn yes" id="yesBtn">Yes 💕</button>
+      <button class="btn no" id="noBtn">No 😢</button>
+    `
+
+    document.getElementById("yesBtn").onclick = yesClick
+    document.getElementById("noBtn").onclick = noClick
+  }
+
+  function resetGame(){
+    noCount = 0
+    yesBtnSize = 18
+    question.innerText = "นาวรักเรามั้ยย? 💖"
+    gif.src = gifs[0]
+    drawButtons()
+  }
+
+  function yesClick(){
+    gif.src = "https://media1.tenor.com/m/qR1sGRNmfqsAAAAC/besito-catlove.gif"
+    question.innerText = "เย่ 💗 เค้าก็รักนาวเหมือนกัน"
+    btnContainer.innerHTML = `
+      <button class="btn" onclick="initGame()">เล่นใหม่</button>
+    `
+  }
+
+  function noClick(){
+    const yesBtn = document.getElementById("yesBtn")
+    const noBtn = document.getElementById("noBtn")
+
+    yesBtnSize += 10
+    yesBtn.style.fontSize = yesBtnSize + "px"
+
+    noCount++
+    gif.src = gifs[Math.min(noCount, gifs.length - 1)]
+
+    if(noCount >= 5){
+      noBtn.remove()
+      yesBtn.innerText = "Love ❤️"
+      yesBtn.classList.add("love")
+      yesBtn.onclick = () => {
+        gif.src = "https://media1.tenor.com/m/qR1sGRNmfqsAAAAC/besito-catlove.gif"
+        question.innerHTML = `<div class="message-box">รักเหมือนกันนน 💞</div>`
+        btnContainer.innerHTML = `
+          <button class="btn" onclick="initGame()">เล่นใหม่</button>
+        `
+      }
+    }
+  }
+
+  resetGame()
+}
+</script>
 
 
 </body>
