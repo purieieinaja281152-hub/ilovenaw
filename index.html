@@ -362,6 +362,49 @@ body{
   }
 }
 
+/* ===== GAME ===== */
+.game-card{
+  text-align:center;
+}
+
+.frame{
+  display:inline-block;
+  border:4px solid #ff69b4;
+  border-radius:18px;
+  padding:18px;
+  background:#fff;
+}
+
+#gif{
+  max-width:260px;
+  max-height:260px;
+  margin:10px 0;
+}
+
+.btn.yes{
+  background:#ff69b4;
+  color:#fff;
+}
+
+.btn.no{
+  background:#ddd;
+}
+
+.btn.love{
+  background:red;
+  color:white;
+  font-size:28px;
+  padding:18px 36px;
+}
+
+.message-box{
+  border:3px dashed #ff69b4;
+  padding:14px;
+  background:#fff0f6;
+  font-size:20px;
+}
+
+
 
 
 /* ===== hearts ===== */
@@ -437,8 +480,10 @@ body{
     <div onpointerdown="playClick(); go('pMemory1')">
 🖼<br>รูป
 </div>
-    <div>🎮<br>เกม</div>
-  </div>
+   <div onpointerdown="playClick(); go('pGame')">
+🎮<br>เกม
+</div>
+
 </div>
 
 <!-- ===== PAGE : TIME MESSAGE ===== -->
@@ -588,6 +633,27 @@ body{
 
     <button class="btn" onclick="go('pMemory1')">⬅ กลับหน้าแรก</button>
     <button class="btn" onclick="go('p3')">กลับเมนู</button>
+  </div>
+</div>
+
+<!-- ===== PAGE : GAME ===== -->
+<div class="page" id="pGame">
+  <div class="card game-card">
+
+    <div class="frame" id="mainFrame">
+      <h1 id="question">นาวรักเรามั้ยย? 💖</h1>
+
+      <img
+        id="gif"
+        src="https://media.tenor.com/76BaX0eo304AAAAj/kitty-kitty-heart.gif"
+        alt="cute gif"
+      >
+
+      <div id="btnContainer"></div>
+    </div>
+
+    <!-- ปุ่มออก -->
+    <button class="btn" onclick="go('p3')">⬅ กลับเมนู</button>
   </div>
 </div>
 
