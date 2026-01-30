@@ -88,6 +88,21 @@ body{
 }
 .hint{font-size:14px;color:#888;margin-bottom:10px}
 .err{color:#ff4f80;height:18px}
+/* ===== PASSWORD CARD TUNE ===== */
+.password-card{
+  min-height:auto;        /* ตัดความสูงขั้นต่ำ */
+  padding:26px 24px;      /* กระชับลง */
+}
+
+.password-card h3{
+  margin-top:0;
+  margin-bottom:14px;
+}
+
+.code-inputs{
+  margin:14px 0;          /* ลดช่องว่าง */
+}
+
 
 /* ===== menu ===== */
 .menu{
@@ -424,6 +439,19 @@ body{
 }
 
 
+/* ===== SHAKE ERROR ===== */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+  100% { transform: translateX(0); }
+}
+
+.shake{
+  animation: shake 0.35s;
+}
 
 
 /* ===== hearts ===== */
@@ -459,7 +487,8 @@ body{
 
 <!-- ===== PAGE 2 : password ===== -->
 <div class="page" id="p2">
-  <div class="card">
+  <div class="card password-card">
+
     <h3>รหัสลับของเรา</h3>
 
     <div class="code-inputs">
@@ -475,8 +504,10 @@ body{
     <div class="err" id="err"></div>
 
     <button class="btn" onclick="check()">ยืนยัน</button>
+    
   </div>
 </div>
+
 
 <!-- ===== PAGE 3 : menu ===== -->
 <div class="page" id="p3">
@@ -946,15 +977,22 @@ function check(){
       setTimeout(()=>h.remove(),4000)
     }
   }else{
-    err.innerText="ผิดแล้วนะ ลองคิดถึงวันสำคัญอีกที 😳"
-     playClick()
+  err.innerText = "ผิดแล้ววว ลองคิดถึงวันสำคัญอีกทีเส้้"
 
-     navigator.vibrate?.(15)
+  // 🔊 เสียง
+  playClick()
 
-     navigator.vibrate?.(15)
+  // 📳 มือถือสั่นแรงขึ้น
+  navigator.vibrate?.([80,40,80])
 
-  }
+  // 💥 การ์ดสั่น
+  const card = document.querySelector("#p2 .card")
+  card.classList.remove("shake") // กันไม่ติดซ้ำ
+  void card.offsetWidth          // รีเฟรช animation
+  card.classList.add("shake")
 }
+
+
 
 /* message */
 function openMsg(){
