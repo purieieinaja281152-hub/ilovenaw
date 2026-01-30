@@ -492,12 +492,14 @@ body{
     <h3>รหัสลับของเรา</h3>
 
     <div class="code-inputs">
-      <input maxlength="1">
-      <input maxlength="1">
-      <input maxlength="1">
-      <input maxlength="1">
-      <input maxlength="1">
-      <input maxlength="1">
+    <input maxlength="1" class="code-input">
+    <input maxlength="1" class="code-input">
+    <input maxlength="1" class="code-input">
+    <input maxlength="1" class="code-input">
+    <input maxlength="1" class="code-input">
+    <input maxlength="1" class="code-input">
+
+  
     </div>
 
     <div class="hint">💡 คำใบ้: วันครบรอบ</div>
@@ -964,18 +966,15 @@ inputs.forEach((inp,i)=>{
 })
 
 function check(){
-  const inputs = document.querySelectorAll(".code-input")
+  const inputs = document.querySelectorAll(".code-inputs input")
   const err = document.getElementById("err")
 
   let code = ""
+  inputs.forEach(i => code += i.value.trim())
 
-  inputs.forEach(i => {
-    code += i.value.trim()
-  })
+  console.log("CODE =", code)
 
-  console.log("CODE =", code) // 👈 เอาไว้ดูใน Console
-
-  const correctCode = "141068" // ❗ ใส่รหัสจริงตรงนี้
+  const correctCode = "141068"
 
   if(code === correctCode){
     playClick()
@@ -992,9 +991,10 @@ function check(){
     card.classList.add("shake")
 
     inputs.forEach(i => i.value = "")
-    inputs[0].focus()
+    inputs[0]?.focus()   // 👈 ใส่ ? กันพังซ้ำ
   }
 }
+
 
 
 
