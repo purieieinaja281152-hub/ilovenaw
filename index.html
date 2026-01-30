@@ -964,33 +964,36 @@ inputs.forEach((inp,i)=>{
 })
 
 function check(){
-  const code=[...inputs].map(i=>i.value).join("")
-  if(code==="141068"){
-    playSound(snd.ok)
+  const inputs = document.querySelectorAll(".code-input")
+  const err = document.getElementById("err")
+
+  let code = ""
+  inputs.forEach(i => code += i.value)
+
+  if(code === "141068"){   // 👈 เปลี่ยน xxxx เป็นรหัสจริงของมึง
+    playClick()
     go("p3")
-    for(let i=0;i<20;i++){
-      const h=document.createElement("div")
-      h.className="heart"
-      h.innerText="💗"
-      h.style.left=Math.random()*100+"vw"
-      document.body.appendChild(h)
-      setTimeout(()=>h.remove(),4000)
-    }
   }else{
-  err.innerText = "ผิดแล้ววว ลองคิดถึงวันสำคัญอีกทีเส้้"
+    err.innerText = "ผิดแล้วนะ ลองคิดถึงวันสำคัญอีกที 😳"
 
-  // 🔊 เสียง
-  playClick()
+    // 🔊 เสียง
+    playClick()
 
-  // 📳 มือถือสั่นแรงขึ้น
-  navigator.vibrate?.([80,40,80])
+    // 📳 มือถือสั่น
+    navigator.vibrate?.([80,40,80])
 
-  // 💥 การ์ดสั่น
-  const card = document.querySelector("#p2 .card")
-  card.classList.remove("shake") // กันไม่ติดซ้ำ
-  void card.offsetWidth          // รีเฟรช animation
-  card.classList.add("shake")
+    // 💥 การ์ดสั่น
+    const card = document.querySelector("#p2 .card")
+    card.classList.remove("shake")
+    void card.offsetWidth
+    card.classList.add("shake")
+
+    // 🧹 ล้างช่อง + โฟกัสใหม่
+    inputs.forEach(i => i.value = "")
+    inputs[0].focus()
+  }
 }
+
 
 
 
