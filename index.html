@@ -88,20 +88,6 @@ body{
 }
 .hint{font-size:14px;color:#888;margin-bottom:10px}
 .err{color:#ff4f80;height:18px}
-/* ===== PASSWORD CARD TUNE ===== */
-.password-card{
-  min-height:auto;        /* ตัดความสูงขั้นต่ำ */
-  padding:26px 24px;      /* กระชับลง */
-}
-
-.password-card h3{
-  margin-top:0;
-  margin-bottom:14px;
-}
-
-.code-inputs{
-  margin:14px 0;          /* ลดช่องว่าง */
-}
 
 
 /* ===== menu ===== */
@@ -439,19 +425,6 @@ body{
 }
 
 
-/* ===== SHAKE ERROR ===== */
-@keyframes shake {
-  0% { transform: translateX(0); }
-  20% { transform: translateX(-6px); }
-  40% { transform: translateX(6px); }
-  60% { transform: translateX(-4px); }
-  80% { transform: translateX(4px); }
-  100% { transform: translateX(0); }
-}
-
-.shake{
-  animation: shake 0.35s;
-}
 
 
 /* ===== hearts ===== */
@@ -487,19 +460,16 @@ body{
 
 <!-- ===== PAGE 2 : password ===== -->
 <div class="page" id="p2">
-  <div class="card password-card">
-
+  <div class="card">
     <h3>รหัสลับของเรา</h3>
 
     <div class="code-inputs">
-    <input maxlength="1" class="code-input">
-    <input maxlength="1" class="code-input">
-    <input maxlength="1" class="code-input">
-    <input maxlength="1" class="code-input">
-    <input maxlength="1" class="code-input">
-    <input maxlength="1" class="code-input">
-
-  
+      <input maxlength="1">
+      <input maxlength="1">
+      <input maxlength="1">
+      <input maxlength="1">
+      <input maxlength="1">
+      <input maxlength="1">
     </div>
 
     <div class="hint">💡 คำใบ้: วันครบรอบ</div>
@@ -966,38 +936,29 @@ inputs.forEach((inp,i)=>{
 })
 
 function check(){
-  const inputs = document.querySelectorAll(".code-inputs input")
-  const err = document.getElementById("err")
-
-  let code = ""
-  inputs.forEach(i => code += i.value.trim())
-
-  console.log("CODE =", code)
-
-  const correctCode = "141068"
-
-  if(code === correctCode){
-    playClick()
+  const code=[...inputs].map(i=>i.value).join("")
+  if(code==="141068"){
+    playSound(snd.ok)
     go("p3")
+    for(let i=0;i<20;i++){
+      const h=document.createElement("div")
+      h.className="heart"
+      h.innerText="💗"
+      h.style.left=Math.random()*100+"vw"
+      document.body.appendChild(h)
+      setTimeout(()=>h.remove(),4000)
+    }
   }else{
-    err.innerText = "ผิดแล่วววว ลองนึกวันครบรอบดีดีเส้"
+    err.innerText="ผิดแล้วนะ ลองคิดถึงวันสำคัญอีกที 😳"
+     playClick()
 
-    playClick()
-    navigator.vibrate?.([80,40,80])
+     navigator.vibrate?.(15)
 
-    const card = document.querySelector("#p2 .card")
-    card.classList.remove("shake")
-    void card.offsetWidth
-    card.classList.add("shake")
+     navigator.vibrate?.(15)
+     
 
-    inputs.forEach(i => i.value = "")
-    inputs[0]?.focus()   // 👈 ใส่ ? กันพังซ้ำ
   }
 }
-
-
-
-
 
 
 /* message */
